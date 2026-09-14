@@ -1,1 +1,1254 @@
+You are a senior product designer, Android engineer, full-stack engineer, IoT architect, AI/ML engineer, UX researcher, and scientific-healthcare application specialist.
 
+Your task is to BUILD A COMPLETE, PROFESSIONAL, FUNCTIONAL APPLICATION FROM SCRATCH called:
+
+THERMOHEAL-AI
+
+Tagline:
+"Smart Foot Health. Sustainable Materials. Intelligent Insights."
+
+Project concept:
+
+ThermoHeal-AI is a smart-foot-health and wellness-monitoring platform connected to a conceptual smart insole developed using banana pseudostem-derived cellulose/nanocellulose biomaterial, passive thermoregulation using bio-based phase-change materials (PCM), multimodal sensing, low-power wireless communication, and AI-assisted analytics.
+
+The application accompanies the physical smart-insole prototype.
+
+IMPORTANT:
+This is a RESEARCH / PROTOTYPE / WELLNESS application.
+It must NOT claim to diagnose, cure, or treat disease.
+AI outputs must be presented as wellness-monitoring insights and decision-support information, not medical diagnosis.
+
+The application must feel suitable for:
+• National-level Avishkar Research Convention
+• Pharmacy research project demonstration
+• Scientific prototype demonstration
+• University research evaluation
+• IoT + AI + biomaterials project
+• Future healthcare technology platform
+
+Do not create a basic CRUD application.
+Do not create a generic fitness dashboard.
+Do not use a generic healthcare template.
+Create a highly polished, futuristic, scientific, sustainable, premium application.
+
+====================================================
+1. CORE PRODUCT VISION
+====================================================
+
+The app represents the digital layer of the ThermoHeal-AI ecosystem.
+
+Physical layer:
+Banana pseudostem
+        ↓
+Biomaterial processing
+        ↓
+Cellulose / nanocellulose
+        ↓
+Structural biomaterial
+        ↓
+Bio-based PCM thermoregulation
+        ↓
+Pressure + temperature + moisture sensing
+        ↓
+Low-power electronics
+        ↓
+Bluetooth / wireless data acquisition
+        ↓
+AI / ML analysis
+        ↓
+Mobile application
+        ↓
+Foot-health wellness insights
+
+The application must visualize this entire ecosystem.
+
+The user should feel that they are interacting with a real research-grade smart insole system.
+
+====================================================
+2. TECHNOLOGY STACK
+====================================================
+
+Build the application as a modern Android application.
+
+Preferred stack:
+
+Frontend:
+• Kotlin
+• Jetpack Compose
+• Material 3
+• Navigation Compose
+• ViewModel
+• StateFlow
+• Coroutines
+• Room Database
+• DataStore
+• Bluetooth Low Energy (BLE)
+• MPAndroidChart OR a modern Compose-compatible charting library
+• Coil for images
+• Lottie for controlled animations where appropriate
+
+Architecture:
+Clean Architecture
+MVVM
+Repository pattern
+Dependency Injection
+
+Recommended structure:
+
+app/
+ ├── data/
+ │    ├── local/
+ │    ├── remote/
+ │    ├── bluetooth/
+ │    ├── repository/
+ │
+ ├── domain/
+ │    ├── model/
+ │    ├── repository/
+ │    ├── usecase/
+ │
+ ├── presentation/
+ │    ├── onboarding/
+ │    ├── dashboard/
+ │    ├── live_monitor/
+ │    ├── pressure/
+ │    ├── temperature/
+ │    ├── moisture/
+ │    ├── gait/
+ │    ├── insights/
+ │    ├── history/
+ │    ├── device/
+ │    ├── sustainability/
+ │    ├── research/
+ │    ├── profile/
+ │    └── settings/
+ │
+ ├── ui/
+ │    ├── components/
+ │    ├── theme/
+ │    ├── icons/
+ │    └── animations/
+ │
+ └── utils/
+
+If an actual backend is needed, use:
+
+Backend:
+• Firebase Authentication
+• Firebase Firestore
+• Firebase Storage
+• Firebase Cloud Functions
+
+AI:
+Create a modular AI service interface so the prototype can initially use local/mock analysis and later connect to a real ML model/API.
+
+Do NOT hard-code the architecture so that replacing mock AI with a trained model becomes difficult.
+
+====================================================
+3. VISUAL IDENTITY
+====================================================
+
+The visual language must combine:
+
+SCIENCE
++
+BIOTECHNOLOGY
++
+SUSTAINABILITY
++
+AI
++
+WEARABLE TECHNOLOGY
++
+PREMIUM DIGITAL HEALTH
+
+The UI should visually communicate:
+
+"Green biotechnology meets intelligent healthcare."
+
+Avoid:
+• excessive neon
+• gaming UI
+• childish illustrations
+• excessive gradients
+• generic blue healthcare templates
+• excessive glassmorphism
+• excessive rounded cards
+• cartoon graphics
+• cluttered dashboards
+
+Use subtle futuristic effects.
+
+====================================================
+4. COMPLETE COLOR SYSTEM
+====================================================
+
+Primary brand color:
+
+Deep Bio Teal
+HEX: #0B4F4F
+
+Secondary teal:
+HEX: #167C78
+
+Technology Teal:
+HEX: #20A6A0
+
+Accent Cyan:
+HEX: #4FD8D1
+
+AI Glow:
+HEX: #63E6D8
+
+Sustainable Green:
+HEX: #39A96B
+
+Eco Green:
+HEX: #65C98A
+
+Deep Forest:
+HEX: #123B32
+
+Scientific Dark:
+HEX: #102A2E
+
+Primary Background:
+HEX: #F4FAF8
+
+Secondary Background:
+HEX: #EAF5F2
+
+Card Background:
+HEX: #FFFFFF
+
+Soft Mint:
+HEX: #DDF3EC
+
+Border:
+HEX: #C8E2DD
+
+Primary Text:
+HEX: #102426
+
+Secondary Text:
+HEX: #58706F
+
+Muted Text:
+HEX: #809392
+
+Success:
+HEX: #36A269
+
+Warning:
+HEX: #E6A23C
+
+Danger:
+HEX: #D9534F
+
+Info:
+HEX: #3296B8
+
+Pressure Heatmap:
+Use a scientifically intuitive scale:
+Low pressure → cool teal
+Medium → green/yellow
+High → orange/red
+
+Temperature visualization:
+Cool → cyan/blue
+Normal → teal/green
+Warm → amber
+High → red
+
+Moisture:
+Low → teal
+Moderate → blue
+High → amber/red
+
+AI confidence:
+High → green
+Moderate → amber
+Low → gray/neutral
+
+Dark Mode:
+
+Background:
+#07191A
+
+Surface:
+#0D2627
+
+Surface Elevated:
+#123334
+
+Primary:
+#42D1C8
+
+Secondary:
+#67E3A2
+
+Text:
+#EAF8F5
+
+Muted:
+#9AB5B1
+
+Use dark mode as a true scientific control-room interface, not simply inverted colors.
+
+====================================================
+5. TYPOGRAPHY
+====================================================
+
+Use a professional modern font.
+
+Preferred:
+Inter
+
+Alternative:
+Manrope
+
+Typography hierarchy:
+
+Display:
+32–40sp
+Bold
+
+Screen title:
+26–30sp
+Bold
+
+Section title:
+20–24sp
+SemiBold
+
+Card title:
+16–18sp
+SemiBold
+
+Body:
+14–16sp
+
+Supporting text:
+12–14sp
+
+Metric numbers:
+28–42sp
+Bold
+
+Use generous spacing.
+
+Do not use all-caps everywhere.
+
+====================================================
+6. LOGO
+====================================================
+
+Create a professional ThermoHeal-AI logo.
+
+Concept:
+• stylized human footprint
+• subtle circuit traces
+• leaf / biomaterial symbolism
+• thermal wave
+• AI node pattern
+
+Logo should work in:
+• app launcher
+• splash screen
+• navigation drawer
+• login page
+• dashboard
+• research presentation mode
+
+Create:
+• full logo
+• icon-only logo
+• monochrome version
+• dark-background version
+
+Do not use random stock icons.
+
+====================================================
+7. APP LAUNCH EXPERIENCE
+====================================================
+
+Create a premium scientific splash animation.
+
+Sequence:
+
+1. Dark forest/teal background.
+2. A subtle glowing particle appears.
+3. Particle expands into a molecular/cellulose pattern.
+4. Molecular structure transforms into a leaf.
+5. Leaf transitions into a footprint.
+6. Footprint develops circuit traces.
+7. Thermal wave passes through the footprint.
+8. ThermoHeal-AI logo appears.
+9. Tagline appears:
+
+"Smart Foot Health.
+Sustainable Materials.
+Intelligent Insights."
+
+10. Transition smoothly to onboarding.
+
+Animation duration:
+2–3 seconds.
+
+Keep it professional and lightweight.
+
+====================================================
+8. ONBOARDING
+====================================================
+
+Create 4 onboarding screens.
+
+SCREEN 1:
+Title:
+"Meet ThermoHeal-AI"
+
+Subtitle:
+"An intelligent wellness platform built around a sustainable smart insole."
+
+Visual:
+Futuristic smart insole.
+
+SCREEN 2:
+Title:
+"Sense Every Step"
+
+Show:
+• Pressure
+• Temperature
+• Moisture
+• Gait/activity
+
+SCREEN 3:
+Title:
+"Turn Data Into Insight"
+
+Show:
+Sensors → AI → personalized wellness insight
+
+SCREEN 4:
+Title:
+"Built From Sustainable Innovation"
+
+Show:
+Banana pseudostem → cellulose → biomaterial → smart insole
+
+Buttons:
+• Skip
+• Continue
+• Get Started
+
+====================================================
+9. AUTHENTICATION
+====================================================
+
+Create:
+
+• Sign Up
+• Login
+• Forgot Password
+• Continue as Demo User
+• Google Sign-In if backend supports it
+
+Registration fields:
+
+Name
+Email
+Password
+Confirm Password
+Age
+Height
+Weight
+Foot Size
+Dominant Foot
+Activity Level
+
+Optional:
+Occupation
+
+Do not collect unnecessary sensitive information.
+
+Show a privacy notice.
+
+====================================================
+10. DEMO MODE
+====================================================
+
+THIS IS CRITICAL.
+
+The application must work even without the physical insole.
+
+Create:
+
+"Research Demo Mode"
+
+When enabled, the application generates realistic simulated sensor data.
+
+Demo controls:
+
+• Start simulation
+• Stop simulation
+• Simulate walking
+• Simulate standing
+• Simulate high pressure
+• Simulate thermal rise
+• Simulate high moisture
+• Simulate abnormal gait trend
+• Reset data
+
+Display:
+"SIMULATED DATA"
+
+very clearly.
+
+Never represent simulated data as real patient data.
+
+====================================================
+11. MAIN NAVIGATION
+====================================================
+
+Use bottom navigation with 5 primary sections:
+
+1. Home
+2. Live
+3. Insights
+4. History
+5. Profile
+
+Additional modules available through Home or navigation drawer:
+
+• Device
+• Sustainability
+• Research
+• AI Analysis
+• Settings
+• About ThermoHeal-AI
+
+Use a clean bottom navigation bar.
+
+Icons:
+• Home
+• Activity / pulse
+• AI spark / brain
+• Analytics
+• Person
+
+====================================================
+12. HOME DASHBOARD
+====================================================
+
+The Home dashboard is the most important screen.
+
+Header:
+
+Good Morning, [Name]
+
+Status:
+"Insole Connected"
+OR
+"Insole Disconnected"
+
+Display a small connection indicator.
+
+Main hero card:
+
+FOOT HEALTH SCORE
+
+Example:
+87 / 100
+
+Circular progress indicator.
+
+Subtitle:
+"Good overall wellness status"
+
+Important:
+Do not describe this as a clinical score.
+
+Label:
+"Wellness Index"
+
+====================================================
+13. DASHBOARD METRICS
+====================================================
+
+Show four primary cards:
+
+PRESSURE
+Current:
+Normal
+
+TEMPERATURE
+Example:
+30.2°C
+
+MOISTURE
+Example:
+18%
+
+ACTIVITY
+Example:
+6,240 steps
+
+Each card includes:
+
+• icon
+• current value
+• status
+• mini trend
+• tap interaction
+
+====================================================
+14. FOOT PRESSURE MAP
+====================================================
+
+Create an interactive foot heatmap.
+
+Display a realistic footprint.
+
+Pressure zones:
+
+• Heel
+• Arch
+• Midfoot
+• Forefoot
+• Big toe
+• Lesser toes
+
+Use a gradient based on pressure intensity.
+
+Interaction:
+Tap zone.
+
+Show:
+
+Zone:
+Left Forefoot
+
+Pressure:
+Medium
+
+Duration:
+18 min
+
+Trend:
+Increasing
+
+Potential insight:
+"Prolonged pressure detected."
+
+Do NOT state:
+"You have an ulcer."
+
+Do NOT diagnose disease.
+
+Use:
+"Consider adjusting posture or taking a short rest."
+
+====================================================
+15. LIVE MONITORING SCREEN
+====================================================
+
+Create a real-time monitoring dashboard.
+
+Header:
+"Live Monitoring"
+
+Connection:
+Bluetooth Connected
+
+Show live cards:
+
+Pressure
+Temperature
+Moisture
+Activity
+
+Create animated charts.
+
+Pressure:
+Line graph / pressure distribution
+
+Temperature:
+Real-time temperature curve
+
+Moisture:
+Moisture percentage curve
+
+Activity:
+Steps / movement
+
+Refresh interval:
+1 second for simulation.
+
+For actual hardware:
+Use BLE notifications where available.
+
+====================================================
+16. PRESSURE MODULE
+====================================================
+
+Screen:
+"Pressure Analysis"
+
+Display:
+
+Left Foot
+Right Foot
+
+Pressure balance:
+Left: 48%
+Right: 52%
+
+Show:
+
+• heel loading
+• forefoot loading
+• arch loading
+• peak pressure
+• pressure duration
+• pressure distribution
+
+Charts:
+
+• pressure over time
+• left vs right
+• zone distribution
+
+AI insight example:
+
+"Your recent activity shows increased loading in the left forefoot compared with your baseline."
+
+Avoid medical diagnosis.
+
+====================================================
+17. TEMPERATURE MODULE
+====================================================
+
+Screen:
+"Thermal Environment"
+
+Display:
+
+Current temperature
+Average temperature
+Maximum temperature
+Minimum temperature
+
+Thermal trend chart.
+
+Show:
+"Thermal Comfort Zone"
+
+Create a visual band representing a configurable comfort range.
+
+If temperature rises:
+
+Status:
+"Warm Trend"
+
+Insight:
+"Foot temperature has increased compared with your recent baseline."
+
+If normal:
+"Thermal conditions appear stable."
+
+Explain that the passive PCM layer is intended to buffer thermal fluctuations.
+
+Do not claim exact medical thermal thresholds unless scientifically validated.
+
+====================================================
+18. MOISTURE MODULE
+====================================================
+
+Screen:
+"Moisture Monitoring"
+
+Display:
+
+Current moisture
+Average moisture
+Moisture trend
+Accumulation duration
+
+Visual:
+Droplet gauge.
+
+Example:
+
+18%
+Stable
+
+Alerts:
+
+"Moisture accumulation detected."
+
+Recommendation:
+"Consider ventilation or a short break if comfortable."
+
+Do not make medical claims.
+
+====================================================
+19. GAIT & ACTIVITY
+====================================================
+
+Create:
+
+"Gait & Activity"
+
+Metrics:
+
+Steps
+Distance
+Active time
+Standing time
+Walking time
+Rest time
+
+Gait trend:
+
+Stable
+Changing
+Needs Attention
+
+Use AI-assisted pattern recognition.
+
+Example:
+
+"Your recent gait pattern differs from your personal baseline."
+
+Avoid:
+"You have a gait disorder."
+
+====================================================
+20. AI ANALYSIS ENGINE
+====================================================
+
+Create a dedicated AI Analysis module.
+
+Pipeline:
+
+Raw Sensor Data
+        ↓
+Data Validation
+        ↓
+Preprocessing
+        ↓
+Feature Extraction
+        ↓
+Pattern Recognition
+        ↓
+Risk/Attention Classification
+        ↓
+Personalized Wellness Insight
+
+The application should visually show this pipeline.
+
+AI outputs:
+
+1. Normal
+2. Observation
+3. Attention
+4. High Attention
+
+Never use "diagnosis".
+
+====================================================
+21. AI FEATURE EXTRACTION
+====================================================
+
+Create conceptual features:
+
+Pressure:
+• peak pressure
+• average pressure
+• pressure duration
+• pressure asymmetry
+• loading distribution
+
+Temperature:
+• current temperature
+• mean temperature
+• temperature slope
+• thermal variability
+
+Moisture:
+• current moisture
+• moisture slope
+• accumulated moisture duration
+
+Activity:
+• step count
+• cadence
+• activity duration
+• standing duration
+
+Gait:
+• left/right balance
+• temporal pattern
+• pressure sequence
+• baseline deviation
+
+Combine these into an AI feature vector.
+
+====================================================
+22. AI INSIGHT CARD
+====================================================
+
+Every AI insight should show:
+
+ICON
+
+TITLE:
+"Pressure Pattern Detected"
+
+SEVERITY:
+Attention
+
+CONFIDENCE:
+84%
+
+OBSERVATION:
+"Pressure has remained elevated in the left forefoot during the recent activity period."
+
+RECOMMENDATION:
+"Consider changing posture, redistributing load, or taking a short rest."
+
+DISCLAIMER:
+"Wellness insight only — not a medical diagnosis."
+
+====================================================
+23. AI EXPLAINABILITY
+====================================================
+
+Do not make AI a black box.
+
+Create:
+
+"Why am I seeing this?"
+
+When tapped:
+
+Show contributing factors.
+
+Example:
+
+Pressure duration
+████████ 78%
+
+Pressure asymmetry
+██████ 61%
+
+Recent activity
+█████ 48%
+
+Temperature trend
+██ 22%
+
+Explain:
+"The insight is primarily influenced by prolonged pressure and recent activity."
+
+This is important for research credibility.
+
+====================================================
+24. PERSONAL BASELINE
+====================================================
+
+Create a baseline system.
+
+The app learns:
+
+• normal pressure pattern
+• normal temperature range
+• normal moisture pattern
+• normal activity
+• normal gait distribution
+
+Display:
+
+"Your Personal Baseline"
+
+Example:
+
+Pressure:
+Stable
+
+Temperature:
++0.8°C above baseline
+
+Moisture:
+Normal
+
+Gait:
+3% deviation
+
+Never call baseline deviations diseases.
+
+====================================================
+25. INSIGHTS SCREEN
+====================================================
+
+Create a timeline of AI insights.
+
+Categories:
+
+All
+Pressure
+Temperature
+Moisture
+Gait
+Activity
+Thermal
+
+Each insight card includes:
+
+Date
+Time
+Type
+Observation
+Severity
+Confidence
+
+Example:
+
+09:42 AM
+Pressure
+
+"Prolonged left forefoot loading detected."
+
+Status:
+Attention
+
+====================================================
+26. DAILY WELLNESS SUMMARY
+====================================================
+
+Create:
+
+"Daily Summary"
+
+Include:
+
+Wellness Index
+Average Temperature
+Average Moisture
+Pressure Balance
+Steps
+Active Time
+AI Insights
+
+Create a summary sentence:
+
+"Your foot-wellness metrics remained generally stable today, with increased pressure observed during prolonged standing."
+
+Do not overstate conclusions.
+
+====================================================
+27. WEEKLY REPORT
+====================================================
+
+Create:
+
+"Weekly Trends"
+
+Charts:
+
+Temperature
+Pressure
+Moisture
+Activity
+Gait
+
+Show:
+
+• best day
+• highest activity
+• most stable day
+• notable trends
+
+Add:
+
+"Download Report"
+
+Generate a professional PDF report if supported.
+
+Report sections:
+
+• User/device information
+• Monitoring period
+• Sensor metrics
+• AI observations
+• Trends
+• System status
+• Research disclaimer
+
+====================================================
+28. HISTORY
+====================================================
+
+History screen:
+
+Today
+Yesterday
+Last 7 Days
+Last 30 Days
+Custom Range
+
+Allow selecting:
+
+• Pressure
+• Temperature
+• Moisture
+• Gait
+• Activity
+
+Use interactive charts.
+
+Allow:
+• zoom
+• pan
+• date selection
+• comparison
+
+====================================================
+29. DEVICE CONNECTION
+====================================================
+
+Create:
+
+"Smart Insole"
+
+Device page.
+
+Display:
+
+Device Name:
+ThermoHeal-AI Insole
+
+Connection:
+Connected
+
+Battery:
+82%
+
+Signal:
+Excellent
+
+Firmware:
+Prototype v1.0
+
+Sensors:
+
+✓ Pressure
+✓ Temperature
+✓ Moisture
+✓ IMU/Gait if available
+
+Buttons:
+
+• Connect
+• Disconnect
+• Scan Devices
+• Test Sensors
+• Calibrate
+• Device Information
+
+====================================================
+30. BLUETOOTH LOW ENERGY
+====================================================
+
+Implement BLE architecture.
+
+The application must be ready to receive:
+
+Pressure data
+Temperature data
+Moisture data
+Activity/gait data
+
+Create a clean abstraction:
+
+BluetoothRepository
+
+SensorDataSource
+
+DeviceRepository
+
+The application should NOT tightly couple UI directly to Bluetooth APIs.
+
+If actual hardware protocol is unknown, create a configurable mock BLE layer.
+
+Clearly mark:
+"Hardware integration pending / prototype interface."
+
+====================================================
+31. SENSOR DATA MODEL
+====================================================
+
+Create models such as:
+
+SensorReading:
+
+timestamp
+leftPressure
+rightPressure
+temperature
+moisture
+steps
+activityState
+batteryLevel
+
+PressureReading:
+
+timestamp
+heel
+arch
+midfoot
+forefoot
+toe
+
+TemperatureReading:
+
+timestamp
+temperature
+
+MoistureReading:
+
+timestamp
+moisture
+
+GaitReading:
+
+timestamp
+leftRightBalance
+cadence
+stridePattern
+
+====================================================
+32. DATA STORAGE
+====================================================
+
+Use Room for local data.
+
+Tables:
+
+Users
+Devices
+SensorReadings
+PressureReadings
+TemperatureReadings
+MoistureReadings
+GaitReadings
+AIInsights
+DailySummaries
+WeeklySummaries
+
+Use timestamps consistently.
+
+Allow offline operation.
+
+Sync with Fi
