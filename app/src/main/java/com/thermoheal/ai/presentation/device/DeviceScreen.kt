@@ -23,6 +23,9 @@ import com.thermoheal.ai.domain.model.ConnectionState
 import com.thermoheal.ai.domain.model.DeviceInfo
 import com.thermoheal.ai.domain.repository.DeviceRepository
 import com.thermoheal.ai.ui.components.*
+import com.thermoheal.ai.ui.responsive.LocalWindowSizeInfo
+import com.thermoheal.ai.ui.responsive.WindowWidthClass
+import com.thermoheal.ai.ui.responsive.readableContentWidth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -59,11 +62,15 @@ class DeviceViewModel @Inject constructor(
 
     fun connect() = viewModelScope.launch {
         _isBusy.value = true
-        deviceRepository.connect(deviceState.value?.id ?: "DEMO-INSOLE-0001")
+        deviceRepository.connect("DEMO-INSOLE-0001")
         _isBusy.value = false
     }
 
-    fun disconnect() = viewModelScope.launch { deviceRepository.disconnect() }
+    fun disconnect() = viewModelScope.launch {
+        _isBusy.value = true
+        deviceRepository.disconnect()
+        _isBusy.value = false
+    }
 
     fun scan() = viewModelScope.launch {
         _isBusy.value = true
@@ -100,9 +107,11 @@ fun DeviceScreen(onBack: () -> Unit, viewModel: DeviceViewModel = hiltViewModel(
     val sensorTest by viewModel.sensorTestResult.collectAsState()
     val calibrationDone by viewModel.calibrationDone.collectAsState()
 
-    Scaffold(topBar = { ThermoHealTopBar("Smart Insole", onBack) }) { padding ->
-        Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(20.dp)) {
+    val windowSize = LocalWindowSizeInfo.current
+    val isTwoColumn = windowSize.widthClass != WindowWidthClass.COMPACT || windowSize.isLandscape
 
+    val hardwareCard: @Composable () -> Unit = {
+        Column {
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Icon(Icons.Filled.Sensors, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(28.dp))
@@ -120,26 +129,26 @@ fun DeviceScreen(onBack: () -> Unit, viewModel: DeviceViewModel = hiltViewModel(
             }
 
             Spacer(Modifier.height(16.dp))
-            SectionHeader("Sensors")
+            SectionHeader("Hardware Sensors")
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
-                SensorStatusRow("Pressure", device?.hasPressureSensor ?: false)
-                SensorStatusRow("Temperature", device?.hasTemperatureSensor ?: false)
-                SensorStatusRow("Moisture", device?.hasMoistureSensor ?: false)
-                SensorStatusRow("IMU / Gait", device?.hasImuSensor ?: false)
+                SensorStatusRow("Pressure Matrix", device?.hasPressureSensor ?: false)
+                SensorStatusRow("Surface / Ambient Thermistors", device?.hasTemperatureSensor ?: false)
+                SensorStatusRow("Capacitive Moisture", device?.hasMoistureSensor ?: false)
+                SensorStatusRow("6-Axis IMU Gait Kinematics", device?.hasImuSensor ?: false)
             }
 
             Spacer(Modifier.height(16.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                Button(onClick = { viewModel.connect() }, enabled = !isBusy, modifier = Modifier.weight(1f)) { Text("Connect") }
-                OutlinedButton(onClick = { viewModel.disconnect() }, enabled = !isBusy, modifier = Modifier.weight(1f)) { Text("Disconnect") }
+                Button(onClick = { viewModel.connect() }, enabled = !isBusy, modifier = Modifier.weight(1f).height(48.dp)) { Text("Connect") }
+                OutlinedButton(onClick = { viewModel.disconnect() }, enabled = !isBusy, modifier = Modifier.weight(1f).height(48.dp)) { Text("Disconnect") }
             }
             Spacer(Modifier.height(10.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                OutlinedButton(onClick = { viewModel.scan() }, enabled = !isBusy, modifier = Modifier.weight(1f)) { Text("Scan Devices") }
-                OutlinedButton(onClick = { viewModel.testSensors() }, enabled = !isBusy, modifier = Modifier.weight(1f)) { Text("Test Sensors") }
+                OutlinedButton(onClick = { viewModel.scan() }, enabled = !isBusy, modifier = Modifier.weight(1f).height(48.dp)) { Text("Scan Devices") }
+                OutlinedButton(onClick = { viewModel.testSensors() }, enabled = !isBusy, modifier = Modifier.weight(1f).height(48.dp)) { Text("Diagnostics") }
             }
             Spacer(Modifier.height(10.dp))
-            OutlinedButton(onClick = { viewModel.calibrate() }, enabled = !isBusy, modifier = Modifier.fillMaxWidth()) { Text("Calibrate") }
+            OutlinedButton(onClick = { viewModel.calibrate() }, enabled = !isBusy, modifier = Modifier.fillMaxWidth().height(48.dp)) { Text("Calibrate Sensors") }
 
             if (sensorTest != null) {
                 Spacer(Modifier.height(12.dp))
@@ -153,21 +162,24 @@ fun DeviceScreen(onBack: () -> Unit, viewModel: DeviceViewModel = hiltViewModel(
                 Spacer(Modifier.height(12.dp))
                 StatusBadge("Calibration complete", BadgeTone.SUCCESS)
             }
+        }
+    }
 
-            Spacer(Modifier.height(24.dp))
+    val simulationCard: @Composable () -> Unit = {
+        Column {
             SectionHeader("Research Demo Mode")
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
                 if (isSimRunning) DemoModeBanner()
                 Spacer(Modifier.height(12.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
-                    Button(onClick = { viewModel.startSimulation() }, enabled = !isSimRunning, modifier = Modifier.weight(1f)) { Text("Start Simulation") }
-                    OutlinedButton(onClick = { viewModel.stopSimulation() }, enabled = isSimRunning, modifier = Modifier.weight(1f)) { Text("Pause Simulation") }
+                    Button(onClick = { viewModel.startSimulation() }, enabled = !isSimRunning, modifier = Modifier.weight(1f).height(48.dp)) { Text("Start Simulation") }
+                    OutlinedButton(onClick = { viewModel.stopSimulation() }, enabled = isSimRunning, modifier = Modifier.weight(1f).height(48.dp)) { Text("Pause Simulation") }
                 }
-                Spacer(Modifier.height(8.dp))
-                OutlinedButton(onClick = { viewModel.resetSimulation() }, modifier = Modifier.fillMaxWidth()) { Text("Reset Simulation") }
+                Spacer(Modifier.height(10.dp))
+                OutlinedButton(onClick = { viewModel.resetSimulation() }, modifier = Modifier.fillMaxWidth().height(48.dp)) { Text("Reset Simulation") }
 
                 Spacer(Modifier.height(16.dp))
-                Text("Scenario", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Scenario Injection", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(8.dp))
                 LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     items(DemoScenario.entries.toList()) { s ->
@@ -181,26 +193,68 @@ fun DeviceScreen(onBack: () -> Unit, viewModel: DeviceViewModel = hiltViewModel(
 
             Spacer(Modifier.height(16.dp))
             Text(
-                "Hardware integration pending / prototype interface. This screen currently drives the built-in simulator; a physical ThermoHeal-AI insole can be wired in via the same BleRepository abstraction.",
+                "Hardware integration pending / prototype interface. This screen drives the built-in simulator; a physical ThermoHeal-AI insole binds via BleRepository.",
                 style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline
             )
-            Spacer(Modifier.height(60.dp))
+        }
+    }
+
+    Scaffold(topBar = { ThermoHealTopBar("Smart Insole & Diagnostics", onBack) }) { padding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .readableContentWidth(maxDp = 1100.dp),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(windowSize.contentPadding)
+            ) {
+                if (isTwoColumn) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(20.dp)
+                    ) {
+                        Column(modifier = Modifier.weight(1.05f)) {
+                            hardwareCard()
+                        }
+                        Column(modifier = Modifier.weight(1.15f)) {
+                            simulationCard()
+                        }
+                    }
+                } else {
+                    hardwareCard()
+                    Spacer(Modifier.height(20.dp))
+                    simulationCard()
+                }
+                Spacer(Modifier.height(84.dp))
+            }
         }
     }
 }
 
 @Composable
 private fun InfoRow(label: String, value: String) {
-    Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         Text(label, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Text(value, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+        Text(value, style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
     }
 }
 
 @Composable
-private fun SensorStatusRow(name: String, ok: Boolean) {
-    Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+private fun SensorStatusRow(name: String, active: Boolean) {
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(vertical = 5.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween
+    ) {
         Text(name, style = MaterialTheme.typography.bodyMedium)
-        StatusBadge(if (ok) "Available" else "Unavailable", if (ok) BadgeTone.SUCCESS else BadgeTone.WARNING)
+        StatusBadge(if (active) "Operational" else "Inactive", if (active) BadgeTone.SUCCESS else BadgeTone.INFO)
     }
 }
