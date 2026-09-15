@@ -20,6 +20,9 @@ import com.thermoheal.ai.domain.repository.SensorRepository
 import com.thermoheal.ai.domain.repository.UserRepository
 import com.thermoheal.ai.ui.components.SectionHeader
 import com.thermoheal.ai.ui.components.ThermoCard
+import com.thermoheal.ai.ui.responsive.LocalWindowSizeInfo
+import com.thermoheal.ai.ui.responsive.WindowWidthClass
+import com.thermoheal.ai.ui.responsive.readableContentWidth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -50,12 +53,16 @@ fun ProfileScreen(
     val user by viewModel.user.collectAsState()
     var showDeleteConfirm by remember { mutableStateOf(false) }
 
-    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(20.dp)) {
-        Text("Profile", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
-        Spacer(Modifier.height(20.dp))
+    val windowSize = LocalWindowSizeInfo.current
+    val isTwoColumn = windowSize.widthClass != WindowWidthClass.COMPACT || windowSize.isLandscape
 
+    val userHero: @Composable () -> Unit = {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Surface(shape = CircleShape, color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f), modifier = Modifier.size(64.dp)) {
+            Surface(
+                shape = CircleShape,
+                color = MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.3f),
+                modifier = Modifier.size(64.dp)
+            ) {
                 Box(contentAlignment = Alignment.Center) {
                     Icon(Icons.Filled.Person, contentDescription = null, tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(32.dp))
                 }
@@ -70,55 +77,110 @@ fun ProfileScreen(
                 }
             }
         }
+    }
 
-        Spacer(Modifier.height(24.dp))
-        SectionHeader("Personalization")
-        ThermoCard(modifier = Modifier.fillMaxWidth()) {
-            ProfileRow("Foot Size", user?.footSizeEu?.let { "EU $it" } ?: "—")
-            ProfileRow("Dominant Foot", user?.dominantFoot?.name?.lowercase()?.replaceFirstChar { it.uppercase() } ?: "—")
-            ProfileRow("Activity Level", user?.activityLevel?.name?.lowercase()?.replaceFirstChar { it.uppercase() } ?: "—")
-            ProfileRow("Height", user?.heightCm?.let { "$it cm" } ?: "—")
-            ProfileRow("Weight", user?.weightKg?.let { "$it kg" } ?: "—")
+    val personalizationCard: @Composable () -> Unit = {
+        Column {
+            SectionHeader("Biometric Profile")
+            ThermoCard(modifier = Modifier.fillMaxWidth()) {
+                ProfileRow("Foot Size", user?.footSizeEu?.let { "EU $it" } ?: "—")
+                ProfileRow("Dominant Foot", user?.dominantFoot?.name?.lowercase()?.replaceFirstChar { it.uppercase() } ?: "—")
+                ProfileRow("Activity Level", user?.activityLevel?.name?.lowercase()?.replaceFirstChar { it.uppercase() } ?: "—")
+                ProfileRow("Height", user?.heightCm?.let { "$it cm" } ?: "—")
+                ProfileRow("Weight", user?.weightKg?.let { "$it kg" } ?: "—")
+            }
+            Spacer(Modifier.height(16.dp))
+            OutlinedButton(
+                onClick = { viewModel.logout(); onLoggedOut() },
+                modifier = Modifier.fillMaxWidth().height(50.dp)
+            ) { Text("Logout") }
         }
+    }
 
-        Spacer(Modifier.height(16.dp))
-        SectionHeader("Device")
-        ThermoCard(modifier = Modifier.fillMaxWidth(), onClick = onOpenDevice) {
-            Text("Connected Insole", style = MaterialTheme.typography.bodyMedium)
-            Text("View device status, calibration, and demo controls", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    val settingsAndDataCards: @Composable () -> Unit = {
+        Column {
+            SectionHeader("Device Management")
+            ThermoCard(modifier = Modifier.fillMaxWidth(), onClick = onOpenDevice) {
+                Text("Connected Insole", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
+                Spacer(Modifier.height(4.dp))
+                Text("View device connection, hardware telemetry, calibration, and demo injection.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+
+            Spacer(Modifier.height(16.dp))
+            SectionHeader("Security & Privacy")
+            ThermoCard(modifier = Modifier.fillMaxWidth()) {
+                TextButton(onClick = onOpenSettings, modifier = Modifier.fillMaxWidth()) {
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
+                        Text("Application Settings & Preferences")
+                    }
+                }
+                TextButton(onClick = onOpenPrivacy, modifier = Modifier.fillMaxWidth()) {
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
+                        Text("Privacy & Safety Center")
+                    }
+                }
+            }
+
+            Spacer(Modifier.height(16.dp))
+            SectionHeader("Local Storage")
+            ThermoCard(modifier = Modifier.fillMaxWidth()) {
+                TextButton(onClick = { showDeleteConfirm = true }, modifier = Modifier.fillMaxWidth()) {
+                    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Start) {
+                        Text("Clear Local Sensor History", color = MaterialTheme.colorScheme.error)
+                    }
+                }
+            }
         }
+    }
 
-        Spacer(Modifier.height(16.dp))
-        SectionHeader("Data")
-        ThermoCard(modifier = Modifier.fillMaxWidth()) {
-            TextButton(onClick = { showDeleteConfirm = true }) { Text("Delete Local Data") }
-        }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .readableContentWidth(maxDp = 1100.dp),
+        contentAlignment = Alignment.TopCenter
+    ) {
+        Column(
+            Modifier
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState())
+                .padding(windowSize.contentPadding)
+        ) {
+            Text("User Profile & Preferences", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+            Spacer(Modifier.height(20.dp))
+            userHero()
+            Spacer(Modifier.height(24.dp))
 
-        Spacer(Modifier.height(16.dp))
-        SectionHeader("Security & Privacy")
-        ThermoCard(modifier = Modifier.fillMaxWidth()) {
-            TextButton(onClick = onOpenSettings) { Text("Settings") }
-            TextButton(onClick = onOpenPrivacy) { Text("Privacy & Safety Center") }
-        }
+            if (isTwoColumn) {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.spacedBy(20.dp)
+                ) {
+                    Column(modifier = Modifier.weight(1f)) {
+                        personalizationCard()
+                    }
+                    Column(modifier = Modifier.weight(1.1f)) {
+                        settingsAndDataCards()
+                    }
+                }
+            } else {
+                personalizationCard()
+                Spacer(Modifier.height(20.dp))
+                settingsAndDataCards()
+            }
 
-        Spacer(Modifier.height(20.dp))
-        OutlinedButton(
-            onClick = { viewModel.logout(); onLoggedOut() },
-            modifier = Modifier.fillMaxWidth().height(50.dp)
-        ) { Text("Logout") }
+            Spacer(Modifier.height(84.dp))
 
-        Spacer(Modifier.height(90.dp))
-
-        if (showDeleteConfirm) {
-            AlertDialog(
-                onDismissRequest = { showDeleteConfirm = false },
-                title = { Text("Delete Local Data?") },
-                text = { Text("This will permanently remove all sensor readings and AI insights stored on this device. This cannot be undone.") },
-                confirmButton = {
-                    TextButton(onClick = { viewModel.deleteLocalData(); showDeleteConfirm = false }) { Text("Delete") }
-                },
-                dismissButton = { TextButton(onClick = { showDeleteConfirm = false }) { Text("Cancel") } }
-            )
+            if (showDeleteConfirm) {
+                AlertDialog(
+                    onDismissRequest = { showDeleteConfirm = false },
+                    title = { Text("Delete Local Data?") },
+                    text = { Text("This will permanently remove all sensor readings and AI insights stored on this device. This cannot be undone.") },
+                    confirmButton = {
+                        TextButton(onClick = { viewModel.deleteLocalData(); showDeleteConfirm = false }) { Text("Delete", color = MaterialTheme.colorScheme.error) }
+                    },
+                    dismissButton = { TextButton(onClick = { showDeleteConfirm = false }) { Text("Cancel") } }
+                )
+            }
         }
     }
 }
