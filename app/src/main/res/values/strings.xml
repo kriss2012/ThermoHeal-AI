@@ -6,4 +6,29 @@
     <string name="ai_disclaimer">AI-generated wellness insight — not a medical diagnosis.</string>
     <string name="research_disclaimer">ThermoHeal-AI is a research and wellness-monitoring prototype. Its sensor measurements and AI-generated insights are intended for monitoring and decision support only and are not intended to diagnose, treat, cure, or prevent disease.</string>
     <string name="clinical_future_note">Clinical performance, safety, accuracy, and regulatory requirements require appropriate validation before clinical deployment.</string>
+
+    <!-- Navigation & Titles -->
+    <string name="nav_home">Home</string>
+    <string name="nav_live">Live</string>
+    <string name="nav_insights">Insights</string>
+    <string name="nav_history">History</string>
+    <string name="nav_profile">Profile</string>
+
+    <!-- Metrics -->
+    <string name="metric_pressure">Pressure</string>
+    <string name="metric_temperature">Temperature</string>
+    <string name="metric_moisture">Moisture</string>
+    <string name="metric_gait">Gait</string>
+    <string name="foot_wellness_index">Foot Wellness Index</string>
+
+    <!-- Status -->
+    <string name="status_connected">Connected</string>
+    <string name="status_disconnected">Disconnected</string>
+    <string name="status_reconnecting">Reconnecting...</string>
+    <string name="demo_mode_banner">DEMO MODE — SIMULATED SENSOR DATA</string>
+
+    <!-- Errors -->
+    <string name="error_ble_connect">Unable to connect to the insole. Please make sure it is nearby and powered on.</string>
+    <string name="error_permission_bluetooth">Bluetooth permissions are required to connect with the smart insole.</string>
+    <string name="error_sensor_invalid">Sensor telemetry packet contains out-of-range values.</string>
 </resources>
