@@ -34,7 +34,7 @@ private data class ImpactPillar(val title: String, val points: List<String>, val
 private val pillars = listOf(
     ImpactPillar("Environmental", listOf("Agricultural waste valorization", "Circular economy reduction", "Biomaterial sustainability"), Icons.Filled.Eco),
     ImpactPillar("Healthcare", listOf("Continuous wellness monitoring", "Preventive foot ulcer awareness", "Multimodal sensing"), Icons.Filled.HealthAndSafety),
-    ImpactPillar("Economic", listOf("Agricultural farmer income addition", "Biomanufacturing supply chain", "Scalable IP innovation"), Icons.AutoMirrored.Filled.TrendingUp),
+    ImpactPillar("Economic", listOf("Agricultural farmer income addition", "Biomanufacturing supply chain", "Scalable IP innovation"), Icons.Filled.TrendingUp),
 )
 
 private data class Application(val title: String, val note: String)
