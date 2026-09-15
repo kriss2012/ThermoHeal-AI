@@ -3,6 +3,7 @@ package com.thermoheal.ai.data.repository
 import com.thermoheal.ai.data.local.dao.*
 import com.thermoheal.ai.domain.model.*
 import com.thermoheal.ai.domain.repository.SensorRepository
+import com.thermoheal.ai.domain.usecase.SensorValidator
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -15,7 +16,8 @@ class SensorRepositoryImpl @Inject constructor(
     private val pressureDao: PressureReadingDao,
     private val temperatureDao: TemperatureReadingDao,
     private val moistureDao: MoistureReadingDao,
-    private val gaitDao: GaitReadingDao
+    private val gaitDao: GaitReadingDao,
+    private val sensorValidator: SensorValidator
 ) : SensorRepository {
 
     override fun observeLatestReading(): Flow<SensorReading?> =
@@ -23,6 +25,12 @@ class SensorRepositoryImpl @Inject constructor(
 
     override fun observeReadingsSince(sinceEpochMillis: Long): Flow<List<SensorReading>> =
         sensorReadingDao.observeSince(sinceEpochMillis).map { list -> list.map { it.toDomain() } }
+
+    override fun observeRecentReadings(limit: Int): Flow<List<SensorReading>> =
+        sensorReadingDao.observeRecent(limit).map { list -> list.reversed().map { it.toDomain() } }
+
+    override suspend fun getAllReadingsForExport(): List<SensorReading> =
+        sensorReadingDao.getAllForExport().map { it.toDomain() }
 
     override fun observePressureReadings(since: Long): Flow<List<PressureReading>> =
         pressureDao.observeSince(since).map { list -> list.map { it.toDomain() } }
@@ -37,32 +45,32 @@ class SensorRepositoryImpl @Inject constructor(
         gaitDao.observeSince(since).map { list -> list.map { it.toDomain() } }
 
     override suspend fun insertReading(reading: SensorReading) {
-        // Data validation gate (section 59) — reject physically impossible packets.
-        val valid = reading.temperature in 15.0..45.0 &&
-            reading.moisture in 0.0..100.0 &&
-            reading.leftPressure >= 0.0 && reading.rightPressure >= 0.0
-        sensorReadingDao.insert(reading.copy(isValid = valid, qualityWarning = if (!valid) "Sensor quality warning" else null).toEntity())
+        // Data validation and sanitization gate (Phase 13)
+        val sanitized = sensorValidator.sanitizeReading(reading)
+        val validated = sensorValidator.validateReading(sanitized)
+        
+        sensorReadingDao.insert(validated.toEntity())
 
         // Derive a zone-level pressure snapshot + a lightweight gait sample from the composite reading
         // so downstream modules (Pressure/Gait screens) always have data to chart.
         pressureDao.insert(
-            derivePressureReading(reading, FootSide.LEFT).toEntity()
+            derivePressureReading(validated, FootSide.LEFT).toEntity()
         )
         pressureDao.insert(
-            derivePressureReading(reading, FootSide.RIGHT).toEntity()
+            derivePressureReading(validated, FootSide.RIGHT).toEntity()
         )
-        temperatureDao.insert(TemperatureReading(timestamp = reading.timestamp, temperature = reading.temperature, sessionType = reading.sessionType).toEntity())
-        moistureDao.insert(MoistureReading(timestamp = reading.timestamp, moisture = reading.moisture, sessionType = reading.sessionType).toEntity())
+        temperatureDao.insert(TemperatureReading(timestamp = validated.timestamp, temperature = validated.temperature, sessionType = validated.sessionType).toEntity())
+        moistureDao.insert(MoistureReading(timestamp = validated.timestamp, moisture = validated.moisture, sessionType = validated.sessionType).toEntity())
 
-        val total = reading.leftPressure + reading.rightPressure
-        val balance = if (total > 0) ((reading.leftPressure - reading.rightPressure) / total) * 100.0 else 0.0
+        val total = validated.leftPressure + validated.rightPressure
+        val balance = if (total > 0) ((validated.leftPressure - validated.rightPressure) / total) * 100.0 else 0.0
         gaitDao.insert(
             GaitReading(
-                timestamp = reading.timestamp,
+                timestamp = validated.timestamp,
                 leftRightBalance = balance,
-                cadence = if (reading.activityState == ActivityState.WALKING) Random.nextDouble(95.0, 118.0) else 0.0,
+                cadence = if (validated.activityState == ActivityState.WALKING) Random.nextDouble(95.0, 118.0) else 0.0,
                 stridePattern = if (kotlin.math.abs(balance) > 20.0) "IRREGULAR" else "REGULAR",
-                sessionType = reading.sessionType
+                sessionType = validated.sessionType
             ).toEntity()
         )
     }
