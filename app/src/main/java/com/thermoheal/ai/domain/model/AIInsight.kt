@@ -18,6 +18,8 @@ data class ContributingFactor(
 
 data class AIInsight(
     val id: Long = 0,
+    val userId: String = "local_user",
+    val sessionId: String = "default_session",
     val timestamp: Long,
     val category: InsightCategory,
     val title: String,
@@ -27,7 +29,11 @@ data class AIInsight(
     val recommendation: String,
     val contributingFactors: List<ContributingFactor> = emptyList(),
     val sessionType: SessionType,
-    val disclaimer: String = "Wellness insight only — not a medical diagnosis."
+    val modelVersion: String = "rule-engine-1.0",
+    val algorithmVersion: String = "FWI-1.0-prototype",
+    val featureVersion: String = "v1",
+    val disclaimer: String = "Wellness insight only — not a medical diagnosis.",
+    val createdAt: Long = System.currentTimeMillis()
 )
 
 /** Feature vector consumed by the rule-based AI engine (section 21). */
@@ -63,7 +69,8 @@ data class WellnessIndex(
     val temperatureComponent: Int,
     val moistureComponent: Int,
     val activityComponent: Int,
-    val gaitComponent: Int
+    val gaitComponent: Int,
+    val algorithmVersion: String = "FWI-1.0-prototype"
 ) {
     val label: String get() = when {
         score >= 90 -> "Excellent"
