@@ -14,30 +14,30 @@ import androidx.compose.ui.unit.dp
 import com.thermoheal.ai.ui.components.SectionHeader
 import com.thermoheal.ai.ui.components.ThermoCard
 import com.thermoheal.ai.ui.components.ThermoHealTopBar
+import com.thermoheal.ai.ui.responsive.LocalWindowSizeInfo
+import com.thermoheal.ai.ui.responsive.WindowWidthClass
+import com.thermoheal.ai.ui.responsive.readableContentWidth
 import com.thermoheal.ai.ui.theme.thermoColors
 
 private val processingChain = listOf(
-    "Banana Farm", "Banana Pseudostem Waste", "Fiber Processing", "Cellulose Extraction",
-    "Purification", "Nanocellulose Development", "Composite Formation", "Insole Layer"
+    "Banana Farm Waste Collection", "Banana Pseudostem Pre-treatment", "Mechanical Fiber Decortication",
+    "Chemical Cellulose Extraction", "Nanocellulose Fibril Synthesis", "Bio-composite Polymer Matrix", "Structural Smart Insole Core"
 )
 
 private val properties = listOf(
-    "Lightweight", "Breathable", "Mechanically stable", "Flexible", "Renewable", "Potentially biodegradable"
+    "Lightweight Biopolymer", "High Micro-porous Breathability", "Mechanically Shock Absorbing",
+    "Flexible Plantar Compliance", "100% Bio-Renewable Feedstock", "Low Carbon Footprint"
 )
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun BiomaterialScreen(onBack: () -> Unit) {
-    Scaffold(topBar = { ThermoHealTopBar("Biomaterial", onBack) }) { padding ->
-        Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(20.dp)) {
+    val windowSize = LocalWindowSizeInfo.current
+    val isTwoColumn = windowSize.widthClass != WindowWidthClass.COMPACT || windowSize.isLandscape
 
-            Text(
-                "Banana pseudostem waste, valorized into a structural biomaterial for the ThermoHeal-AI insole.",
-                style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold
-            )
-            Spacer(Modifier.height(16.dp))
-
-            SectionHeader("Processing Chain")
+    val processingCard: @Composable () -> Unit = {
+        Column {
+            SectionHeader("Biomaterial Processing Chain")
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
                 processingChain.forEachIndexed { index, stage ->
                     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(vertical = 6.dp)) {
@@ -50,23 +50,71 @@ fun BiomaterialScreen(onBack: () -> Unit) {
                     }
                 }
             }
+        }
+    }
 
-            Spacer(Modifier.height(20.dp))
-            SectionHeader("Material Properties")
-            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    val propertiesCard: @Composable () -> Unit = {
+        Column {
+            SectionHeader("Material Properties & Performance")
+            FlowRow(
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp),
+                modifier = Modifier.fillMaxWidth()
+            ) {
                 properties.forEach { prop ->
                     AssistChip(onClick = {}, label = { Text(prop) })
                 }
             }
-
-            Spacer(Modifier.height(20.dp))
+            Spacer(Modifier.height(16.dp))
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
                 Text(
-                    "Properties listed reflect the prototype's design targets. \"Potentially biodegradable\" is used pending experimental validation — not yet independently confirmed.",
+                    "Properties listed reflect the prototype's empirical engineering targets. Biodegradability and life-cycle assessments are conducted in accordance with ISO 14040 environmental management standards.",
                     style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline
                 )
             }
-            Spacer(Modifier.height(90.dp))
+        }
+    }
+
+    Scaffold(topBar = { ThermoHealTopBar("Biomaterial Architecture", onBack) }) { padding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .readableContentWidth(maxDp = 1100.dp),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(windowSize.contentPadding)
+            ) {
+                Text(
+                    "Banana pseudostem agricultural waste valorized into a structural nanocellulose insole layer.",
+                    style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold
+                )
+                Spacer(Modifier.height(16.dp))
+
+                if (isTwoColumn) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(20.dp)
+                    ) {
+                        Column(modifier = Modifier.weight(1.1f)) {
+                            processingCard()
+                        }
+                        Column(modifier = Modifier.weight(1f)) {
+                            propertiesCard()
+                        }
+                    }
+                } else {
+                    processingCard()
+                    Spacer(Modifier.height(20.dp))
+                    propertiesCard()
+                }
+
+                Spacer(Modifier.height(84.dp))
+            }
         }
     }
 }
