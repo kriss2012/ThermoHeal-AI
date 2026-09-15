@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface SensorRepository {
     fun observeLatestReading(): Flow<SensorReading?>
     fun observeReadingsSince(sinceEpochMillis: Long): Flow<List<SensorReading>>
+    fun observeRecentReadings(limit: Int = 120): Flow<List<SensorReading>>
     fun observePressureReadings(since: Long): Flow<List<PressureReading>>
     fun observeTemperatureReadings(since: Long): Flow<List<TemperatureReading>>
     fun observeMoistureReadings(since: Long): Flow<List<MoistureReading>>
@@ -19,6 +20,7 @@ interface SensorRepository {
     suspend fun insertGaitReading(reading: GaitReading)
 
     suspend fun getZoneDetail(zone: FootZone, side: FootSide): ZoneDetail
+    suspend fun getAllReadingsForExport(): List<SensorReading>
     suspend fun clearAllLocalData()
 }
 
@@ -38,6 +40,7 @@ interface UserRepository {
     suspend fun continueAsDemoUser(): Result<UserProfile>
     suspend fun logout()
     suspend fun updateProfile(profile: UserProfile)
+    suspend fun deleteAccount(): Result<Unit>
     suspend fun isLoggedIn(): Boolean
 }
 
