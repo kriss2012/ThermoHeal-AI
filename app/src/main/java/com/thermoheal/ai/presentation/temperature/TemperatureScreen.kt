@@ -10,6 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.thermoheal.ai.domain.model.TemperatureReading
 import com.thermoheal.ai.domain.repository.SensorRepository
@@ -31,7 +32,7 @@ class TemperatureViewModel @Inject constructor(
 
 @Composable
 fun TemperatureScreen(onBack: () -> Unit, viewModel: TemperatureViewModel = hiltViewModel()) {
-    val readings by viewModel.readings.collectAsState()
+    val readings by viewModel.readings.collectAsStateWithLifecycle()
     val current = readings.lastOrNull()?.temperature
     val avg = readings.map { it.temperature }.let { if (it.isEmpty()) null else it.average() }
     val max = readings.maxOfOrNull { it.temperature }
