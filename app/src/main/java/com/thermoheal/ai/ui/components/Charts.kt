@@ -84,7 +84,7 @@ fun ThermoLineChart(
                         detectTapGestures(
                             onPress = { offset ->
                                 if (values.isNotEmpty()) {
-                                    val stepX = if (values.size > 1) size.width / (values.size - 1) else size.width.toFloat()
+                                    val stepX = if (values.size > 1) size.width.toFloat() / (values.size - 1).toFloat() else size.width.toFloat()
                                     val idx = (offset.x / stepX).toInt().coerceIn(0, values.lastIndex)
                                     selectedIndex = idx
                                 }
@@ -95,7 +95,7 @@ fun ThermoLineChart(
                         detectDragGestures(
                             onDragStart = { offset ->
                                 if (values.isNotEmpty()) {
-                                    val stepX = if (values.size > 1) size.width / (values.size - 1) else size.width.toFloat()
+                                    val stepX = if (values.size > 1) size.width.toFloat() / (values.size - 1).toFloat() else size.width.toFloat()
                                     selectedIndex = (offset.x / stepX).toInt().coerceIn(0, values.lastIndex)
                                 }
                             },
@@ -104,7 +104,7 @@ fun ThermoLineChart(
                             onDrag = { change, _ ->
                                 change.consume()
                                 if (values.isNotEmpty()) {
-                                    val stepX = if (values.size > 1) size.width / (values.size - 1) else size.width.toFloat()
+                                    val stepX = if (values.size > 1) size.width.toFloat() / (values.size - 1).toFloat() else size.width.toFloat()
                                     selectedIndex = (change.position.x / stepX).toInt().coerceIn(0, values.lastIndex)
                                 }
                             }
