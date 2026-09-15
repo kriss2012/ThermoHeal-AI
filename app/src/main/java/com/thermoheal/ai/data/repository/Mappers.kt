@@ -6,43 +6,69 @@ import org.json.JSONArray
 import org.json.JSONObject
 
 fun SensorReading.toEntity() = SensorReadingEntity(
+    userId = userId, sessionId = sessionId,
     timestamp = timestamp, leftPressure = leftPressure, rightPressure = rightPressure,
     temperature = temperature, moisture = moisture, steps = steps,
     activityState = activityState.name, batteryLevel = batteryLevel,
-    sessionType = sessionType.name, isValid = isValid, qualityWarning = qualityWarning
+    sessionType = sessionType.name, isValid = isValid,
+    quality = quality.name, qualityWarning = qualityWarning, createdAt = createdAt
 )
 
 fun SensorReadingEntity.toDomain() = SensorReading(
-    id = id, timestamp = timestamp, leftPressure = leftPressure, rightPressure = rightPressure,
+    id = id, userId = userId, sessionId = sessionId,
+    timestamp = timestamp, leftPressure = leftPressure, rightPressure = rightPressure,
     temperature = temperature, moisture = moisture, steps = steps,
     activityState = runCatching { ActivityState.valueOf(activityState) }.getOrDefault(ActivityState.UNKNOWN),
     batteryLevel = batteryLevel,
     sessionType = runCatching { SessionType.valueOf(sessionType) }.getOrDefault(SessionType.DEMO),
-    isValid = isValid, qualityWarning = qualityWarning
+    isValid = isValid,
+    quality = runCatching { SensorQuality.valueOf(quality) }.getOrDefault(SensorQuality.GOOD),
+    qualityWarning = qualityWarning,
+    createdAt = createdAt
 )
 
 fun PressureReading.toEntity() = PressureReadingEntity(
+    userId = userId, sessionId = sessionId,
     timestamp = timestamp, side = side.name, heel = heel, arch = arch, midfoot = midfoot,
-    forefoot = forefoot, bigToe = bigToe, lesserToes = lesserToes, sessionType = sessionType.name
+    forefoot = forefoot, bigToe = bigToe, lesserToes = lesserToes, sessionType = sessionType.name,
+    createdAt = createdAt
 )
 
 fun PressureReadingEntity.toDomain() = PressureReading(
-    id = id, timestamp = timestamp, side = FootSide.valueOf(side), heel = heel, arch = arch,
+    id = id, userId = userId, sessionId = sessionId,
+    timestamp = timestamp, side = FootSide.valueOf(side), heel = heel, arch = arch,
     midfoot = midfoot, forefoot = forefoot, bigToe = bigToe, lesserToes = lesserToes,
-    sessionType = SessionType.valueOf(sessionType)
+    sessionType = SessionType.valueOf(sessionType), createdAt = createdAt
 )
 
-fun TemperatureReading.toEntity() = TemperatureReadingEntity(timestamp = timestamp, temperature = temperature, sessionType = sessionType.name)
-fun TemperatureReadingEntity.toDomain() = TemperatureReading(id, timestamp, temperature, SessionType.valueOf(sessionType))
+fun TemperatureReading.toEntity() = TemperatureReadingEntity(
+    userId = userId, sessionId = sessionId, timestamp = timestamp,
+    temperature = temperature, sessionType = sessionType.name, createdAt = createdAt
+)
+fun TemperatureReadingEntity.toDomain() = TemperatureReading(
+    id = id, userId = userId, sessionId = sessionId, timestamp = timestamp,
+    temperature = temperature, sessionType = SessionType.valueOf(sessionType), createdAt = createdAt
+)
 
-fun MoistureReading.toEntity() = MoistureReadingEntity(timestamp = timestamp, moisture = moisture, sessionType = sessionType.name)
-fun MoistureReadingEntity.toDomain() = MoistureReading(id, timestamp, moisture, SessionType.valueOf(sessionType))
+fun MoistureReading.toEntity() = MoistureReadingEntity(
+    userId = userId, sessionId = sessionId, timestamp = timestamp,
+    moisture = moisture, sessionType = sessionType.name, createdAt = createdAt
+)
+fun MoistureReadingEntity.toDomain() = MoistureReading(
+    id = id, userId = userId, sessionId = sessionId, timestamp = timestamp,
+    moisture = moisture, sessionType = SessionType.valueOf(sessionType), createdAt = createdAt
+)
 
 fun GaitReading.toEntity() = GaitReadingEntity(
-    timestamp = timestamp, leftRightBalance = leftRightBalance, cadence = cadence,
-    stridePattern = stridePattern, sessionType = sessionType.name
+    userId = userId, sessionId = sessionId, timestamp = timestamp,
+    leftRightBalance = leftRightBalance, cadence = cadence,
+    stridePattern = stridePattern, sessionType = sessionType.name, createdAt = createdAt
 )
-fun GaitReadingEntity.toDomain() = GaitReading(id, timestamp, leftRightBalance, cadence, stridePattern, SessionType.valueOf(sessionType))
+fun GaitReadingEntity.toDomain() = GaitReading(
+    id = id, userId = userId, sessionId = sessionId, timestamp = timestamp,
+    leftRightBalance = leftRightBalance, cadence = cadence,
+    stridePattern = stridePattern, sessionType = SessionType.valueOf(sessionType), createdAt = createdAt
+)
 
 fun List<ContributingFactor>.toJson(): String {
     val arr = JSONArray()
@@ -61,17 +87,23 @@ fun String.toFactors(): List<ContributingFactor> = runCatching {
 }.getOrDefault(emptyList())
 
 fun AIInsight.toEntity() = AIInsightEntity(
-    timestamp = timestamp, category = category.name, title = title, severity = severity.name,
+    userId = userId, sessionId = sessionId, timestamp = timestamp,
+    category = category.name, title = title, severity = severity.name,
     confidencePercent = confidencePercent, observation = observation, recommendation = recommendation,
-    contributingFactorsJson = contributingFactors.toJson(), sessionType = sessionType.name, disclaimer = disclaimer
+    contributingFactorsJson = contributingFactors.toJson(), sessionType = sessionType.name,
+    modelVersion = modelVersion, algorithmVersion = algorithmVersion,
+    disclaimer = disclaimer, createdAt = createdAt
 )
 
 fun AIInsightEntity.toDomain() = AIInsight(
-    id = id, timestamp = timestamp, category = InsightCategory.valueOf(category), title = title,
+    id = id, userId = userId, sessionId = sessionId, timestamp = timestamp,
+    category = InsightCategory.valueOf(category), title = title,
     severity = InsightSeverity.valueOf(severity), confidencePercent = confidencePercent,
     observation = observation, recommendation = recommendation,
     contributingFactors = contributingFactorsJson.toFactors(),
-    sessionType = SessionType.valueOf(sessionType), disclaimer = disclaimer
+    sessionType = SessionType.valueOf(sessionType),
+    modelVersion = modelVersion, algorithmVersion = algorithmVersion,
+    disclaimer = disclaimer, createdAt = createdAt
 )
 
 fun UserEntity.toDomain() = UserProfile(
