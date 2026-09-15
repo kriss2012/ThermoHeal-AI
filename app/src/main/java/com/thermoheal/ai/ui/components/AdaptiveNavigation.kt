@@ -125,7 +125,7 @@ fun ThermoHealAdaptiveScaffold(
                 currentRoute = currentRoute,
                 onNavigate = onNavigate
             )
-            Divider(
+            VerticalDivider(
                 modifier = Modifier
                     .fillMaxHeight()
                     .width(1.dp),
