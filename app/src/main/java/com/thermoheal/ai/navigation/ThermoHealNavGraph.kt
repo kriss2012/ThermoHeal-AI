@@ -37,7 +37,7 @@ import com.thermoheal.ai.presentation.setup.ProfileSetupScreen
 import com.thermoheal.ai.presentation.splash.SplashScreen
 import com.thermoheal.ai.presentation.sustainability.SustainabilityScreen
 import com.thermoheal.ai.presentation.temperature.TemperatureScreen
-import com.thermoheal.ai.ui.components.ThermoHealBottomBar
+import com.thermoheal.ai.ui.components.ThermoHealAdaptiveScaffold
 import kotlinx.coroutines.launch
 
 @Composable
@@ -47,18 +47,17 @@ fun ThermoHealNavGraph(rootViewModel: RootViewModel = hiltViewModel()) {
     val currentRoute = backStackEntry?.destination?.route
     val scope = rememberCoroutineScope()
 
-    val showBottomBar = Screen.bottomNavScreens.any { it.route == currentRoute }
+    val showNavigation = Screen.bottomNavScreens.any { it.route == currentRoute } ||
+            currentRoute == Screen.Device.route || currentRoute == Screen.Research.route
 
-    Scaffold(
-        bottomBar = {
-            if (showBottomBar) {
-                ThermoHealBottomBar(currentRoute = currentRoute) { screen ->
-                    navController.navigate(screen.route) {
-                        popUpTo(Screen.Home.route) { saveState = true }
-                        launchSingleTop = true
-                        restoreState = true
-                    }
-                }
+    ThermoHealAdaptiveScaffold(
+        currentRoute = currentRoute,
+        showNavigation = showNavigation,
+        onNavigate = { screen ->
+            navController.navigate(screen.route) {
+                popUpTo(Screen.Home.route) { saveState = true }
+                launchSingleTop = true
+                restoreState = true
             }
         }
     ) { padding ->
