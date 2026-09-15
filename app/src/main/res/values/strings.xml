@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ThermoHeal-AI</string>
+    <string name="app_tagline">Smart Foot Health. Sustainable Materials. Intelligent Insights.</string>
+    <string name="medical_disclaimer">ThermoHeal-AI provides wellness-monitoring information and decision-support insights. It is not intended to diagnose, treat, cure, or prevent disease.</string>
+    <string name="ai_disclaimer">AI-generated wellness insight — not a medical diagnosis.</string>
+    <string name="research_disclaimer">ThermoHeal-AI is a research and wellness-monitoring prototype. Its sensor measurements and AI-generated insights are intended for monitoring and decision support only and are not intended to diagnose, treat, cure, or prevent disease.</string>
+    <string name="clinical_future_note">Clinical performance, safety, accuracy, and regulatory requirements require appropriate validation before clinical deployment.</string>
+</resources>
