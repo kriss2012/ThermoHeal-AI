@@ -3,6 +3,7 @@ package com.thermoheal.ai.utils
 import android.content.Context
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -16,7 +17,7 @@ private val Context.dataStore by preferencesDataStore(name = "thermoheal_prefs")
  * notification prefs, demo-mode/simulation settings, research mode flag.
  */
 @Singleton
-class PreferencesManager @Inject constructor(context: Context) {
+class PreferencesManager @Inject constructor(@ApplicationContext context: Context) {
 
     private val dataStore = context.dataStore
 
