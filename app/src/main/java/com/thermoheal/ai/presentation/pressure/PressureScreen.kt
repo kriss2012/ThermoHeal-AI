@@ -10,6 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.thermoheal.ai.domain.model.FootSide
 import com.thermoheal.ai.domain.model.PressureReading
@@ -34,7 +35,7 @@ class PressureViewModel @Inject constructor(
 
 @Composable
 fun PressureScreen(onBack: () -> Unit, viewModel: PressureViewModel = hiltViewModel()) {
-    val readings by viewModel.readings.collectAsState()
+    val readings by viewModel.readings.collectAsStateWithLifecycle()
     val left = readings.filter { it.side == FootSide.LEFT }
     val right = readings.filter { it.side == FootSide.RIGHT }
     val leftAvg = left.map { it.average }.let { if (it.isEmpty()) 0.0 else it.average() }
