@@ -32,10 +32,14 @@ class SensorIngestionManager @Inject constructor(
         started = true
         scope.launch {
             bleRepository.observeIncomingReadings().collect { reading ->
-                sensorRepository.insertReading(reading)
-                readingCount++
-                if (readingCount % 15 == 0) {
-                    generateInsightFromRecentWindow(reading.sessionType)
+                try {
+                    sensorRepository.insertReading(reading)
+                    readingCount++
+                    if (readingCount % 15 == 0) {
+                        generateInsightFromRecentWindow(reading.sessionType)
+                    }
+                } catch (e: Exception) {
+                    com.thermoheal.ai.utils.AppLogger.e("Sensor ingestion error", e)
                 }
             }
         }
