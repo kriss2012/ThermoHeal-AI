@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.thermoheal.ai.R
+import com.thermoheal.ai.ui.responsive.readableContentWidth
 import kotlinx.coroutines.launch
 
 private data class OnboardingPage(val title: String, val subtitle: String, val icon: ImageVector)
@@ -53,10 +54,19 @@ fun OnboardingScreen(onFinished: () -> Unit) {
     val pagerState = rememberPagerState(pageCount = { pages.size })
     val scope = rememberCoroutineScope()
 
-    Column(Modifier.fillMaxSize().padding(24.dp)) {
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
-            TextButton(onClick = onFinished) { Text("Skip") }
-        }
+    Box(
+        modifier = Modifier.fillMaxSize(),
+        contentAlignment = Alignment.Center
+    ) {
+        Column(
+            Modifier
+                .fillMaxHeight()
+                .readableContentWidth(maxDp = 640.dp)
+                .padding(24.dp)
+        ) {
+            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                TextButton(onClick = onFinished) { Text("Skip") }
+            }
 
         HorizontalPager(state = pagerState, modifier = Modifier.weight(1f)) { page ->
             val p = pages[page]
@@ -112,17 +122,31 @@ fun OnboardingScreen(onFinished: () -> Unit) {
             }
         }
 
-        Button(
-            onClick = {
-                if (pagerState.currentPage < pages.size - 1) {
-                    scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
-                } else {
-                    onFinished()
-                }
-            },
-            modifier = Modifier.fillMaxWidth().height(52.dp)
+        Row(
+            modifier = Modifier.fillMaxWidth().padding(top = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            Text(if (pagerState.currentPage == pages.size - 1) "Get Started" else "Continue")
+            if (pagerState.currentPage > 0) {
+                OutlinedButton(
+                    onClick = {
+                        scope.launch { pagerState.animateScrollToPage(pagerState.currentPage - 1) }
+                    },
+                    modifier = Modifier.weight(1f).height(52.dp)
+                ) {
+                    Text("Back")
+                }
+            }
+            Button(
+                onClick = {
+                    if (pagerState.currentPage < pages.size - 1) {
+                        scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) }
+                    } else {
+                        onFinished()
+                    }
+                },
+                modifier = Modifier.weight(if (pagerState.currentPage > 0) 1.5f else 1f).height(52.dp)
+            ) {
+                Text(if (pagerState.currentPage == pages.size - 1) "Get Started" else "Continue")
         }
     }
 }
