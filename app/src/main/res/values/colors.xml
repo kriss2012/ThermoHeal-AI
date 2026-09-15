@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bio_teal_deep">#0B4F4F</color>
+    <color name="bio_teal_secondary">#167C78</color>
+    <color name="tech_teal">#20A6A0</color>
+    <color name="accent_cyan">#4FD8D1</color>
+    <color name="ai_glow">#63E6D8</color>
+    <color name="sustainable_green">#39A96B</color>
+    <color name="eco_green">#65C98A</color>
+    <color name="deep_forest">#123B32</color>
+    <color name="scientific_dark">#102A2E</color>
+    <color name="bg_primary">#F4FAF8</color>
+    <color name="bg_secondary">#EAF5F2</color>
+    <color name="card_bg">#FFFFFF</color>
+    <color name="soft_mint">#DDF3EC</color>
+    <color name="border">#C8E2DD</color>
+    <color name="text_primary">#102426</color>
+    <color name="text_secondary">#58706F</color>
+    <color name="text_muted">#809392</color>
+    <color name="success">#36A269</color>
+    <color name="warning">#E6A23C</color>
+    <color name="danger">#D9534F</color>
+    <color name="info">#3296B8</color>
+</resources>
