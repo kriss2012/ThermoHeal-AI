@@ -144,7 +144,7 @@ fun HomeScreen(
                     accentColor = MaterialTheme.thermoColors.info, modifier = Modifier.weight(1f), onClick = onOpenMoisture
                 )
                 MetricCard(
-                    icon = Icons.Filled.DirectionsWalk, label = "Activity",
+                    icon = Icons.AutoMirrored.Filled.DirectionsWalk, label = "Activity",
                     value = reading?.let { "${it.steps} steps" } ?: "0 steps",
                     status = reading?.activityState?.name?.lowercase()?.replaceFirstChar { it.uppercase() } ?: "Idle",
                     trend = Trend.STABLE, accentColor = MaterialTheme.thermoColors.ecoGreen,
