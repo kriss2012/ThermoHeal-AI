@@ -10,6 +10,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.thermoheal.ai.domain.model.GaitReading
 import com.thermoheal.ai.domain.repository.SensorRepository
@@ -32,7 +33,7 @@ class GaitViewModel @Inject constructor(
 
 @Composable
 fun GaitScreen(onBack: () -> Unit, viewModel: GaitViewModel = hiltViewModel()) {
-    val readings by viewModel.readings.collectAsState()
+    val readings by viewModel.readings.collectAsStateWithLifecycle()
     val avgCadence = readings.filter { it.cadence > 0 }.map { it.cadence }.let { if (it.isEmpty()) 0.0 else it.average() }
     val activeCount = readings.count { it.cadence > 0 }
     val standingCount = readings.size - activeCount
