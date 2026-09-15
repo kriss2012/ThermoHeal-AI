@@ -17,8 +17,22 @@ data class UserProfile(
     val activityLevel: ActivityLevel,
     val occupation: String? = null,
     val isDemoUser: Boolean = false,
-    val createdAt: Long
+    val createdAt: Long,
+    val updatedAt: Long = createdAt
 )
+
+/** Full BLE State Machine per Phase 12 */
+enum class BleConnectionState(val displayName: String) {
+    DISCONNECTED("Disconnected"),
+    SCANNING("Scanning..."),
+    CONNECTING("Connecting..."),
+    CONNECTED("Connected"),
+    DISCOVERING_SERVICES("Discovering Services..."),
+    READY("Ready"),
+    RECEIVING_DATA("Receiving Telemetry"),
+    RECONNECTING("Reconnecting..."),
+    ERROR("Connection Error")
+}
 
 enum class ConnectionState { CONNECTED, DISCONNECTED, CONNECTING, SCANNING, ERROR }
 enum class SignalStrength { EXCELLENT, GOOD, FAIR, POOR, UNKNOWN }
