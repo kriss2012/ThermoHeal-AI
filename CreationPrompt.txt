@@ -1251,4 +1251,1914 @@ Use timestamps consistently.
 
 Allow offline operation.
 
-Sync with Fi
+Sync with Firebase when online.
+
+====================================================
+33. RESEARCH MODE
+====================================================
+
+Create a dedicated:
+
+"Research Mode"
+
+This is especially important for the Avishkar demonstration.
+
+Display:
+
+Project:
+ThermoHeal-AI
+
+Prototype:
+Smart Thermoregulatory Insole
+
+Research domains:
+
+• Biomaterials
+• Passive thermoregulation
+• Wearable sensing
+• AI analytics
+• Sustainable healthcare
+
+Show the research workflow:
+
+Material Characterization
+        ↓
+Thermal Testing
+        ↓
+Sensor Validation
+        ↓
+Mechanical Testing
+        ↓
+System Integration
+        ↓
+AI Validation
+        ↓
+User Study
+
+The validation roadmap should mirror the project's research presentation.
+
+====================================================
+34. BIOMATERIAL MODULE
+====================================================
+
+Create:
+
+"Biomaterial"
+
+Visualize:
+
+Banana Farm
+↓
+Banana Pseudostem Waste
+↓
+Fiber Processing
+↓
+Cellulose Extraction
+↓
+Purification
+↓
+Nanocellulose Development
+↓
+Composite Formation
+↓
+Insole Layer
+
+Show properties:
+
+Lightweight
+Breathable
+Mechanically stable
+Flexible
+Renewable
+Potentially biodegradable
+
+IMPORTANT:
+Use "potentially biodegradable" unless experimentally validated.
+
+====================================================
+35. THERMOREGULATION MODULE
+====================================================
+
+Create:
+
+"Passive Thermoregulation"
+
+Explain:
+
+Hot condition:
+Foot temperature rises
+↓
+PCM absorbs thermal energy
+↓
+Phase transition occurs
+↓
+Excess heat is buffered
+
+Cold condition:
+Temperature falls
+↓
+Stored thermal energy is released
+↓
+Microclimate may stabilize
+
+Create an animated thermal diagram.
+
+Display:
+"Passive thermal buffering"
+
+Avoid claiming guaranteed temperature control.
+
+====================================================
+36. INSOLE ARCHITECTURE SCREEN
+====================================================
+
+Create an interactive exploded insole.
+
+Layers:
+
+1. Foot-contact / comfort layer
+2. Thermoregulation layer
+3. Sensing layer
+4. Structural biomaterial layer
+5. Cushioning/base layer
+6. Electronics module
+
+When a layer is tapped:
+
+Show:
+
+Layer name
+Function
+Material / technology
+Research purpose
+
+Example:
+
+THERMOREGULATION LAYER
+
+Bio-based PCM microcapsules
+
+Purpose:
+Passive heat absorption and release.
+
+====================================================
+37. SUSTAINABILITY DASHBOARD
+====================================================
+
+Create:
+
+"Sustainability"
+
+Visual circular economy.
+
+Flow:
+
+Agricultural Waste
+↓
+Bioresource
+↓
+Biomaterial
+↓
+Healthcare Product
+↓
+Circular Bioeconomy
+
+Show key concepts:
+
+• agricultural waste valorization
+• farmer-to-biomanufacturing value chain
+• reduced dependence on synthetic/petrochemical polymers
+• circular bioeconomy
+• healthcare value creation
+
+Use an elegant circular animation.
+
+====================================================
+38. IMPACT DASHBOARD
+====================================================
+
+Show three impact pillars:
+
+ENVIRONMENTAL
+
+Agricultural waste valorization
+Circular economy
+Biomaterial innovation
+
+HEALTHCARE
+
+Continuous wellness monitoring
+Preventive wellness support
+Multimodal sensing
+
+ECONOMIC
+
+Agricultural value addition
+Biomanufacturing opportunity
+Scalable innovation
+
+Use three-column cards.
+
+====================================================
+39. WHO CAN BENEFIT
+====================================================
+
+Create:
+
+"Potential Applications"
+
+Cards:
+
+Healthcare Professionals
+• prolonged standing
+
+Elderly Populations
+• mobility and wellness tracking
+
+Athletes
+• gait and stress optimization
+
+Industrial Personnel
+• prolonged/extreme environments
+
+Military Personnel
+• extreme environments
+
+Clearly label:
+
+"Potential applications only."
+
+====================================================
+40. SAFETY CENTER
+====================================================
+
+Create a dedicated:
+
+"Safety & Privacy"
+
+Show:
+
+• Skin-contact biocompatibility consideration
+• Moisture-sealed electronics
+• Low-power operation
+• On-device preprocessing where applicable
+• Data privacy
+• Secure communication
+• Safe prototype testing
+
+Important:
+Do not claim that these have already been clinically validated.
+
+Use language such as:
+
+"Design consideration"
+"Target specification"
+"Validation required"
+
+====================================================
+41. MEDICAL DISCLAIMER
+====================================================
+
+Place a persistent but unobtrusive disclaimer.
+
+Example:
+
+"ThermoHeal-AI provides wellness-monitoring information and decision-support insights. It is not intended to diagnose, treat, cure, or prevent disease."
+
+On AI screens:
+
+"AI-generated wellness insight — not a medical diagnosis."
+
+This disclaimer is mandatory.
+
+====================================================
+42. PRIVACY
+====================================================
+
+Create Privacy Center.
+
+Features:
+
+• Data collection explanation
+• Sensor data
+• Account data
+• AI processing
+• Data storage
+• Delete local data
+• Export data
+• Logout
+• Privacy policy
+
+Use secure authentication.
+
+Do not expose raw sensor data unnecessarily.
+
+====================================================
+43. NOTIFICATIONS
+====================================================
+
+Create notification system.
+
+Notification types:
+
+Pressure:
+"Prolonged pressure detected."
+
+Temperature:
+"Temperature trend is above your recent baseline."
+
+Moisture:
+"Moisture accumulation detected."
+
+Device:
+"Insole battery is low."
+
+Connection:
+"Insole disconnected."
+
+AI:
+"New wellness insight available."
+
+Allow notification controls.
+
+====================================================
+44. PROFILE
+====================================================
+
+Profile screen:
+
+Avatar
+Name
+Email
+
+Personalization:
+
+Foot size
+Activity level
+Preferred units
+Temperature units
+Notification preferences
+
+Device:
+
+Connected insole
+
+Data:
+
+Export data
+Delete data
+
+Security:
+
+Password
+Biometric unlock if supported
+
+====================================================
+45. SETTINGS
+====================================================
+
+Settings:
+
+Appearance:
+• Light
+• Dark
+• System
+
+Units:
+• Metric
+• Imperial
+
+Notifications
+
+Bluetooth
+
+Privacy
+
+AI Preferences
+
+Demo Mode
+
+Research Mode
+
+About
+
+App Version
+
+====================================================
+46. RESEARCH PRESENTATION MODE
+====================================================
+
+THIS FEATURE IS VERY IMPORTANT FOR AVISHKAR.
+
+Create:
+
+"Presentation Mode"
+
+It should transform the app into a highly visual demonstration.
+
+Pages:
+
+1. Problem
+2. Sustainable solution
+3. Smart insole architecture
+4. Sensor data
+5. AI pipeline
+6. Live simulation
+7. Wellness insights
+8. Validation roadmap
+9. Circular economy
+10. Future roadmap
+
+Provide:
+"Start Demonstration"
+
+The app automatically moves through the sequence.
+
+This mode should be optimized for:
+• projector
+• large display
+• tablet
+• judging panel demonstration
+
+====================================================
+47. LIVE DEMO SCENARIO
+====================================================
+
+Create a scripted demonstration.
+
+Scenario:
+
+STATE 1:
+Normal walking
+
+Pressure:
+Balanced
+
+Temperature:
+Stable
+
+Moisture:
+Stable
+
+AI:
+"Normal pattern"
+
+STATE 2:
+Prolonged standing
+
+Pressure:
+Left forefoot increases
+
+AI:
+"Prolonged pressure detected."
+
+Recommendation:
+"Consider redistributing load or taking a short rest."
+
+STATE 3:
+Warm environment
+
+Temperature:
+Gradually rises
+
+PCM visualization:
+Thermal energy absorption animation
+
+AI:
+"Thermal trend detected."
+
+STATE 4:
+Moisture accumulation
+
+Moisture:
+Gradually increases
+
+AI:
+"Moisture accumulation detected."
+
+STATE 5:
+Return to normal
+
+All metrics stabilize.
+
+This creates a powerful live research demonstration.
+
+====================================================
+48. DASHBOARD MICRO-ANIMATIONS
+====================================================
+
+Use subtle animations:
+
+• Sensor cards pulse during live data
+• Connection icon animates
+• Foot pressure heatmap changes smoothly
+• Temperature line updates
+• Moisture droplet gently fills
+• AI processing animation
+• Circular score animation
+• Data synchronization indicator
+
+Avoid excessive animation.
+
+====================================================
+49. COMPONENT DESIGN SYSTEM
+====================================================
+
+Create reusable components:
+
+ThermoCard
+MetricCard
+SensorCard
+AIInsightCard
+PressureHeatmap
+TemperatureChart
+MoistureGauge
+GaitChart
+FootHealthScore
+ConnectionBadge
+StatusBadge
+ResearchCard
+SustainabilityCard
+LayerCard
+TimelineItem
+SectionHeader
+BottomNavigation
+TopAppBar
+EmptyState
+LoadingState
+ErrorState
+DemoControlCard
+
+All components must follow one coherent design system.
+
+====================================================
+50. CARDS
+====================================================
+
+Card style:
+
+Corner radius:
+16–22dp
+
+Shadow:
+very subtle
+
+Border:
+1dp
+
+Padding:
+16–20dp
+
+Do not make every card floating dramatically.
+
+Use hierarchy.
+
+Primary cards can use:
+Deep teal / soft mint backgrounds.
+
+====================================================
+51. ICONOGRAPHY
+====================================================
+
+Use clean line icons.
+
+Categories:
+
+Foot
+Thermometer
+Droplet
+Pressure
+Activity
+Bluetooth
+AI
+Leaf
+Cellulose
+Molecule
+Shield
+Battery
+Chart
+Research
+Device
+
+Icons should be consistent.
+
+====================================================
+52. EMPTY STATES
+====================================================
+
+If no device:
+
+"Connect your ThermoHeal-AI insole"
+
+If no history:
+
+"No sensor history yet."
+
+If no AI insight:
+
+"Continue monitoring to generate personalized wellness insights."
+
+If Bluetooth unavailable:
+
+"Bluetooth connection is required for live hardware data."
+
+Always provide an action button.
+
+====================================================
+53. ERROR STATES
+====================================================
+
+Handle:
+
+Bluetooth disabled
+Device unavailable
+Sensor unavailable
+Invalid data
+Network unavailable
+Database failure
+Authentication failure
+
+Never crash.
+
+Show friendly recovery actions.
+
+====================================================
+54. LOADING STATES
+====================================================
+
+Use skeleton loading.
+
+Avoid generic spinning loaders everywhere.
+
+For AI processing:
+
+Show:
+
+Collecting data
+↓
+Preprocessing
+↓
+Extracting features
+↓
+Analyzing patterns
+↓
+Generating insight
+
+====================================================
+55. ACCESSIBILITY
+====================================================
+
+Support:
+
+• large text
+• screen readers
+• sufficient contrast
+• touch targets ≥48dp
+• color should never be the only status indicator
+• meaningful content descriptions
+
+Pressure status should use:
+color + text + icon.
+
+====================================================
+56. RESPONSIVE DESIGN
+====================================================
+
+Support:
+
+Android phones
+Large phones
+Tablets
+
+Portrait:
+Primary design.
+
+Landscape:
+Research presentation mode.
+
+Do not allow layout overflow.
+
+Charts must resize correctly.
+
+====================================================
+57. PERFORMANCE
+====================================================
+
+Optimize for:
+
+• low memory
+• battery
+• BLE processing
+• chart rendering
+• background synchronization
+
+Use:
+• StateFlow
+• lifecycle-aware collection
+• lazy lists
+• efficient database queries
+
+Do not continuously redraw the entire UI unnecessarily.
+
+====================================================
+58. SECURITY
+====================================================
+
+Implement:
+
+• encrypted local sensitive storage where appropriate
+• secure authentication
+• Firestore security rules
+• HTTPS
+• no hard-coded API keys
+• no passwords stored locally
+• no sensitive logs
+• safe logout
+
+====================================================
+59. DATA VALIDATION
+====================================================
+
+Sensor data must be validated.
+
+Reject:
+
+• impossible temperature values
+• negative moisture
+• invalid pressure values
+• corrupted timestamps
+• duplicate sensor packets
+
+Mark invalid packets.
+
+Show:
+"Sensor quality warning"
+
+Do not silently use bad data.
+
+====================================================
+60. AI ARCHITECTURE
+====================================================
+
+Create:
+
+AIEngine interface
+
+Methods:
+
+analyzePressure()
+analyzeTemperature()
+analyzeMoisture()
+analyzeGait()
+generateWellnessInsight()
+calculateWellnessIndex()
+
+The prototype can use rule-based logic initially.
+
+Example:
+
+IF pressure_duration > threshold
+AND pressure > personal_baseline
+THEN
+generate:
+"Prolonged pressure pattern detected."
+
+But clearly label the system:
+
+"Prototype AI / Rule-based demonstration"
+
+Design the architecture so a trained ML model can replace the prototype engine later.
+
+====================================================
+61. AI CONFIDENCE
+====================================================
+
+Every insight can contain:
+
+confidenceScore
+
+But never imply medical accuracy.
+
+Example:
+
+AI Confidence:
+84%
+
+Label:
+
+"Pattern confidence"
+
+Not:
+"Diagnostic confidence"
+
+====================================================
+62. FOOT HEALTH SCORE
+====================================================
+
+Do not make this a medical score.
+
+Call it:
+
+"Foot Wellness Index"
+
+Potential components:
+
+Pressure stability
+Temperature stability
+Moisture stability
+Activity consistency
+Gait consistency
+
+Normalize to:
+
+0–100
+
+Display:
+
+90–100:
+Excellent
+
+75–89:
+Good
+
+60–74:
+Moderate
+
+Below 60:
+Attention
+
+Include:
+
+"Prototype wellness index — not clinically validated."
+
+====================================================
+63. ANALYTICS
+====================================================
+
+Create analytics engine.
+
+Calculate:
+
+Mean
+Median
+Minimum
+Maximum
+Standard deviation
+Trend
+Baseline deviation
+Duration
+Frequency
+
+Use these for visualization.
+
+====================================================
+64. CHART DESIGN
+====================================================
+
+Charts should be premium and minimal.
+
+Use:
+
+• thin lines
+• smooth curves
+• subtle grid
+• labeled axes
+• tooltip
+• time selector
+
+Avoid:
+• 3D charts
+• unnecessary gradients
+• rainbow charts
+• excessive decorations
+
+====================================================
+65. FOOT VISUALIZATION
+====================================================
+
+Create a high-quality foot visualization.
+
+Modes:
+
+Pressure
+Temperature
+Moisture
+
+Toggle:
+
+LEFT
+RIGHT
+BOTH
+
+Foot map should animate smoothly.
+
+Show legend.
+
+====================================================
+66. DEVICE HEALTH
+====================================================
+
+Device dashboard:
+
+Battery
+Connection
+Signal
+Sensor status
+Firmware
+Last synchronization
+Data packets
+
+Sensor status:
+
+✓ Pressure
+✓ Temperature
+✓ Moisture
+
+If unavailable:
+
+⚠ Sensor unavailable
+
+====================================================
+67. OFFLINE-FIRST
+====================================================
+
+The app should continue functioning without internet.
+
+Offline:
+
+• dashboard
+• local history
+• demo mode
+• charts
+• AI prototype
+• device state
+
+Online:
+• cloud sync
+• account
+• backups
+• future ML service
+
+====================================================
+68. SAMPLE DATA
+====================================================
+
+Create realistic demo datasets.
+
+Example normal:
+
+Pressure:
+low-medium
+
+Temperature:
+29.8–31.2°C
+
+Moisture:
+12–22%
+
+Gait:
+balanced
+
+Example pressure event:
+
+Forefoot:
+high
+
+Duration:
+12–25 min
+
+Example thermal event:
+
+Temperature:
+31°C → 34°C
+
+Example moisture:
+
+Moisture:
+18% → 35%
+
+Ensure changes are gradual rather than random spikes.
+
+====================================================
+69. FIRST-RUN EXPERIENCE
+====================================================
+
+After account creation:
+
+Step 1:
+Create profile
+
+Step 2:
+Choose:
+
+Connect Physical Insole
+OR
+Research Demo Mode
+
+Step 3:
+Sensor calibration
+
+Step 4:
+Foot baseline setup
+
+Step 5:
+Dashboard
+
+====================================================
+70. CALIBRATION
+====================================================
+
+Create:
+
+"Sensor Calibration"
+
+Instructions:
+
+1. Remove footwear / prepare the insole according to prototype protocol.
+2. Place foot normally.
+3. Remain still.
+4. Collect baseline.
+5. Confirm calibration.
+
+Show:
+
+Pressure baseline
+Temperature baseline
+Moisture baseline
+
+Do not invent laboratory calibration specifications.
+
+====================================================
+71. RESEARCH DATA EXPORT
+====================================================
+
+Allow:
+
+CSV export
+JSON export
+PDF report
+
+Fields:
+
+timestamp
+pressure
+temperature
+moisture
+activity
+gait
+AI insight
+device status
+
+Clearly identify:
+real data / simulated data.
+
+====================================================
+72. ABOUT PROJECT
+====================================================
+
+Create:
+
+"About ThermoHeal-AI"
+
+Sections:
+
+Problem
+Innovation
+Technology
+Biomaterial
+Thermoregulation
+Sensors
+AI
+Sustainability
+Research roadmap
+
+Include:
+
+"From Agricultural Waste to Healthcare Value"
+
+====================================================
+73. RESEARCH ROADMAP
+====================================================
+
+Show:
+
+Phase 1:
+Material Characterization
+• tensile
+• moisture
+• stability
+
+Phase 2:
+Thermal Testing
+• thermal cycling
+• heat absorption
+
+Phase 3:
+Sensor Validation
+• accuracy
+• repeatability
+• latency
+
+Phase 4:
+Mechanical Testing
+• compression
+• fatigue
+• wear
+
+Phase 5:
+System Integration
+• power performance
+• connectivity
+
+Phase 6:
+AI Validation
+• dataset training
+• sensitivity analysis
+
+Phase 7:
+User Study
+• post-ethical approval testing
+
+Do not represent future phases as completed unless real project data is provided.
+
+====================================================
+74. FUTURE ROADMAP
+====================================================
+
+Show:
+
+Prototype
+↓
+Characterization
+↓
+AI Dataset
+↓
+Human Validation
+↓
+Scale-up / IP
+
+Use status:
+
+Current
+In Progress
+Planned
+Future
+
+Never fabricate research results.
+
+====================================================
+75. UI FLOW
+====================================================
+
+Complete navigation:
+
+Splash
+↓
+Onboarding
+↓
+Login / Signup
+↓
+Profile Setup
+↓
+Device Setup
+↓
+Demo or Real Device
+↓
+Home
+
+Home
+├── Live Monitoring
+├── Pressure
+├── Temperature
+├── Moisture
+├── Gait
+├── AI Insights
+├── History
+├── Device
+├── Sustainability
+├── Research
+├── Presentation Mode
+└── Settings
+
+====================================================
+76. HOME SCREEN LAYOUT
+====================================================
+
+Top:
+
+ThermoHeal-AI logo
+Greeting
+Connection status
+Notification icon
+
+Hero:
+
+Foot Wellness Index
+87
+
+Next:
+
+2×2 metric grid
+
+Pressure
+Temperature
+Moisture
+Activity
+
+Next:
+
+Pressure Heatmap
+
+Next:
+
+AI Insight
+
+Next:
+
+Today's Summary
+
+Bottom navigation.
+
+====================================================
+77. DESIGN LANGUAGE
+====================================================
+
+The application should look like:
+
+Apple Health
++
+WHOOP
++
+Oura
++
+modern scientific dashboard
++
+biotech laboratory interface
+
+BUT:
+
+Do not copy their UI.
+
+Create an original ThermoHeal-AI identity.
+
+The design must feel:
+
+• premium
+• scientific
+• calm
+• trustworthy
+• futuristic
+• sustainable
+• intelligent
+
+====================================================
+78. LIGHT MODE
+====================================================
+
+Light mode should use:
+
+Background:
+#F4FAF8
+
+Cards:
+#FFFFFF
+
+Primary:
+#0B4F4F
+
+Accent:
+#20A6A0
+
+Green:
+#39A96B
+
+Text:
+#102426
+
+The overall appearance should be bright and clinical without looking sterile.
+
+====================================================
+79. DARK MODE
+====================================================
+
+Dark mode:
+
+Background:
+#07191A
+
+Cards:
+#0D2627
+
+Primary:
+#42D1C8
+
+Accent:
+#67E3A2
+
+Text:
+#EAF8F5
+
+Use subtle glow around:
+
+AI
+Bluetooth
+Live sensors
+
+Do not overuse glow.
+
+====================================================
+80. SCREEN TRANSITIONS
+====================================================
+
+Use:
+
+Fade
+Slide
+Shared element where appropriate
+
+Avoid dramatic gaming transitions.
+
+Dashboard:
+fast and responsive.
+
+Research:
+slightly more cinematic.
+
+====================================================
+81. MICROCOPY
+====================================================
+
+Use professional wording.
+
+Instead of:
+"Something is wrong!"
+
+Use:
+"Attention pattern detected."
+
+Instead of:
+"Dangerous temperature!"
+
+Use:
+"Temperature trend requires attention."
+
+Instead of:
+"You may have a disease."
+
+Use:
+"Pattern differs from your recent baseline."
+
+Instead of:
+"Diagnosis"
+
+Use:
+"Wellness insight."
+
+====================================================
+82. SCIENTIFIC INTEGRITY
+====================================================
+
+This is a research application.
+
+NEVER:
+
+• invent clinical validation
+• invent human trial results
+• invent sensor accuracy
+• invent biomaterial performance
+• invent disease detection capabilities
+• claim regulatory approval
+• claim clinical diagnosis
+• claim guaranteed thermal control
+
+When information is unavailable, display:
+
+"Not yet validated."
+
+or
+
+"Prototype specification."
+
+====================================================
+83. DEMO LABELING
+====================================================
+
+Whenever simulated data is active, show:
+
+DEMO MODE
+
+SIMULATED SENSOR DATA
+
+in a visible but elegant banner.
+
+Use amber/teal warning styling.
+
+Never allow users to confuse demo data with physical-device data.
+
+====================================================
+84. EMPTY PROJECT DATA
+====================================================
+
+Do not make the app look broken if there is no data.
+
+Use an elegant sample state:
+
+"Your wellness timeline will appear here after monitoring begins."
+
+Buttons:
+
+Start Demo
+Connect Insole
+
+====================================================
+85. NOTIFICATION CENTER
+====================================================
+
+Create a notification inbox.
+
+Categories:
+
+Device
+Sensor
+AI
+System
+
+Allow:
+
+Read
+Unread
+Mark all read
+Delete
+
+====================================================
+86. SEARCH
+====================================================
+
+Optional global search.
+
+Search:
+
+Insights
+Reports
+Research modules
+Sensor data
+
+====================================================
+87. APP SETTINGS FOR RESEARCH DEMO
+====================================================
+
+Add:
+
+Simulation speed:
+Slow
+Normal
+Fast
+
+Scenario:
+
+Normal
+Pressure
+Thermal
+Moisture
+Mixed
+
+Data frequency:
+1 sec
+5 sec
+10 sec
+
+AI:
+Rule-based prototype
+
+====================================================
+88. ADMIN / RESEARCHER MODE
+====================================================
+
+Create optional researcher mode.
+
+Features:
+
+Participant ID
+Session ID
+Sensor stream
+Raw data
+Processed data
+AI output
+Export
+
+Do not expose this by default to normal users.
+
+====================================================
+89. DATABASE SEPARATION
+====================================================
+
+Separate:
+
+User Data
+Device Data
+Sensor Data
+Research Data
+
+Use clear identifiers.
+
+Do not mix demo and real datasets.
+
+Every session must contain:
+
+sessionType:
+DEMO
+REAL_DEVICE
+RESEARCH
+
+====================================================
+90. FINAL APP QUALITY
+====================================================
+
+The final application must:
+
+• compile successfully
+• have no placeholder buttons
+• have no dead navigation
+• have no broken screens
+• have no fake loading forever
+• handle errors
+• persist login
+• persist preferences
+• persist demo settings
+• store history
+• work offline
+• support dark mode
+• support responsive layouts
+• support accessibility
+
+Every button must perform a meaningful action.
+
+====================================================
+91. REQUIRED FUNCTIONAL BUTTONS
+====================================================
+
+Implement:
+
+Get Started
+Login
+Signup
+Continue Demo
+Connect Insole
+Scan Devices
+Start Monitoring
+Stop Monitoring
+View Details
+View History
+View Insight
+View All
+Export
+Generate Report
+Start Presentation
+Start Simulation
+Pause Simulation
+Reset Simulation
+Enable Notifications
+Settings
+Logout
+
+No button should be decorative only.
+
+====================================================
+92. PRESENTATION MODE VISUAL DESIGN
+====================================================
+
+For Avishkar demonstration:
+
+Use a dark scientific background.
+
+Show:
+
+LIVE SENSOR DATA
+
+Pressure
+Temperature
+Moisture
+Gait
+
+Large central foot visualization.
+
+Right side:
+
+AI ANALYSIS
+
+Raw data
+↓
+Feature extraction
+↓
+Pattern recognition
+↓
+Insight
+
+Bottom:
+
+"THERMOHEAL-AI"
+
+with subtle animated waveform.
+
+====================================================
+93. APPLICATION HOME BRAND MESSAGE
+====================================================
+
+Use:
+
+"From sustainable biomaterials
+to intelligent foot-health insights."
+
+Secondary:
+
+"One platform connecting biomaterials,
+thermoregulation, sensing and AI."
+
+====================================================
+94. FIRST DEMO SCRIPT
+====================================================
+
+On Presentation Mode:
+
+Display:
+
+STEP 01
+"Sensor connection established."
+
+STEP 02
+"Collecting multimodal foot data."
+
+STEP 03
+"Preprocessing sensor signals."
+
+STEP 04
+"Extracting pressure, thermal and moisture features."
+
+STEP 05
+"AI pattern analysis."
+
+STEP 06
+"Generating wellness insight."
+
+STEP 07
+"Actionable recommendation."
+
+This should visually demonstrate the research architecture.
+
+====================================================
+95. FUTURE HARDWARE READY
+====================================================
+
+The software architecture must allow future integration with:
+
+ESP32
+nRF52
+BLE microcontrollers
+Flexible pressure sensors
+Temperature sensors
+Moisture sensors
+IMU
+
+Do not assume one exact hardware board unless explicitly configured.
+
+====================================================
+96. API DESIGN
+====================================================
+
+Create clean interfaces.
+
+Example:
+
+GET /user/profile
+GET /device/status
+GET /sensor/readings
+GET /insights
+GET /history
+POST /sensor/readings
+POST /ai/analyze
+POST /reports
+
+Use repository abstraction.
+
+====================================================
+97. TESTING
+====================================================
+
+Create:
+
+Unit tests
+Repository tests
+ViewModel tests
+AI engine tests
+Sensor validation tests
+
+Test:
+
+• invalid readings
+• missing sensor
+• BLE disconnect
+• offline state
+• AI analysis
+• database persistence
+• demo mode separation
+
+====================================================
+98. FINAL DELIVERABLES
+====================================================
+
+Generate:
+
+1. Complete Android project
+2. Clean architecture
+3. All screens
+4. Navigation
+5. Theme system
+6. Dark mode
+7. Demo mode
+8. BLE architecture
+9. Sensor simulation
+10. AI prototype
+11. Room database
+12. Firebase-ready architecture
+13. Research mode
+14. Presentation mode
+15. Charts
+16. Foot heatmap
+17. Sustainability module
+18. Biomaterial module
+19. Thermoregulation module
+20. Reports
+21. Export
+22. Privacy
+23. Safety disclaimer
+24. Testing
+25. README
+26. Setup instructions
+
+====================================================
+99. DEVELOPMENT PRIORITY
+====================================================
+
+Build in this order:
+
+PHASE 1:
+Project setup
+Theme
+Navigation
+Architecture
+
+PHASE 2:
+Splash
+Onboarding
+Authentication
+
+PHASE 3:
+Home Dashboard
+
+PHASE 4:
+Sensor simulation
+
+PHASE 5:
+Pressure / temperature / moisture / gait
+
+PHASE 6:
+Charts and history
+
+PHASE 7:
+AI prototype
+
+PHASE 8:
+BLE abstraction
+
+PHASE 9:
+Research Mode
+
+PHASE 10:
+Sustainability / biomaterial / thermoregulation
+
+PHASE 11:
+Presentation Mode
+
+PHASE 12:
+Reports / export
+
+PHASE 13:
+Security / accessibility
+
+PHASE 14:
+Testing and polish
+
+====================================================
+100. CRITICAL FINAL DESIGN REQUIREMENT
+====================================================
+
+Do not make the application look like an AI-generated template.
+
+The final product should look like a real startup/research laboratory product developed by:
+
+• biomedical engineers
+• pharmacists
+• biomaterials researchers
+• IoT engineers
+• AI researchers
+• UX designers
+
+The UI should communicate scientific credibility.
+
+Use the following design formula:
+
+70% clean scientific interface
+20% sustainable biotechnology identity
+10% futuristic AI/IoT accents
+
+The main visual motif should be:
+
+FOOTPRINT
++
+CELLULOSE FIBERS
++
+THERMAL WAVE
++
+CIRCUIT TRACES
++
+AI NETWORK
+
+====================================================
+101. FINAL SAFETY LANGUAGE
+====================================================
+
+Include this exact statement in the application:
+
+"ThermoHeal-AI is a research and wellness-monitoring prototype. Its sensor measurements and AI-generated insights are intended for monitoring and decision support only and are not intended to diagnose, treat, cure, or prevent disease."
+
+For future clinical use:
+
+"Clinical performance, safety, accuracy, and regulatory requirements require appropriate validation before clinical deployment."
+
+====================================================
+102. FINAL OUTPUT INSTRUCTION
+====================================================
+
+Do not merely generate mockup screens.
+
+BUILD THE ACTUAL APPLICATION.
+
+Start by creating the project structure and design system.
+
+Then implement:
+
+Splash
+Onboarding
+Authentication
+Home
+Live Monitoring
+Pressure
+Temperature
+Moisture
+Gait
+AI Insights
+History
+Device
+Research
+Biomaterial
+Thermoregulation
+Sustainability
+Presentation Mode
+Profile
+Settings
+Privacy
+
+Make every screen navigable.
+
+Make every important button functional.
+
+Use realistic simulated data.
+
+Clearly distinguish simulated data from real sensor data.
+
+Use the ThermoHeal-AI color system consistently.
+
+Ensure the entire application feels like one coherent product.
+
+At the end:
+
+1. Verify compilation.
+2. Verify navigation.
+3. Verify all buttons.
+4. Verify dark mode.
+5. Verify demo mode.
+6. Verify sensor simulation.
+7. Verify data persistence.
+8. Verify AI insight generation.
+9. Verify charts.
+10. Verify presentation mode.
+11. Verify no crashes.
+12. Verify responsive Android layouts.
+13. Verify safety disclaimers.
+14. Provide setup/run instructions.
+15. Provide a complete README.
+
+DO NOT STOP AT DESIGN.
+DO NOT CREATE STATIC MOCKUPS.
+DO NOT LEAVE PLACEHOLDER SCREENS.
+BUILD THE FUNCTIONAL PROTOTYPE.
