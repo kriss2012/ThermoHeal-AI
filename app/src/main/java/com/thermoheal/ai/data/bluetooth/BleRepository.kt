@@ -26,33 +26,3 @@ interface BleRepository {
     suspend fun testSensors(): Map<String, Boolean>
     suspend fun calibrate(): Result<Unit>
 }
-
-/**
- * Real-hardware implementation stub. Intentionally unimplemented in this
- * prototype build — wire this up once the insole's GATT profile is fixed.
- *
- * Expected shape once implemented:
- *   BluetoothLeScanner -> ScanCallback -> BluetoothGatt -> BluetoothGattCallback
- *   -> characteristic notifications -> packet parser -> SensorReading
- */
-class RealBleRepository : BleRepository {
-    override fun observeConnectionState(): Flow<DeviceInfo> =
-        throw NotImplementedError("Hardware integration pending / prototype interface. See BleRepository docs.")
-
-    override fun observeIncomingReadings(): Flow<SensorReading> =
-        throw NotImplementedError("Hardware integration pending / prototype interface.")
-
-    override suspend fun scan(): List<DeviceInfo> =
-        throw NotImplementedError("Hardware integration pending / prototype interface.")
-
-    override suspend fun connect(deviceId: String): Result<Unit> =
-        Result.failure(NotImplementedError("Hardware integration pending / prototype interface."))
-
-    override suspend fun disconnect() { /* no-op until hardware is wired up */ }
-
-    override suspend fun testSensors(): Map<String, Boolean> =
-        throw NotImplementedError("Hardware integration pending / prototype interface.")
-
-    override suspend fun calibrate(): Result<Unit> =
-        Result.failure(NotImplementedError("Hardware integration pending / prototype interface."))
-}
