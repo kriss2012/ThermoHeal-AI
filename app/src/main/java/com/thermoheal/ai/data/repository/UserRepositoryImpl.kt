@@ -1,6 +1,6 @@
 package com.thermoheal.ai.data.repository
 
-import com.thermoheal.ai.data.local.dao.UserDao
+import com.thermoheal.ai.data.local.dao.*
 import com.thermoheal.ai.data.local.entity.UserEntity
 import com.thermoheal.ai.domain.model.*
 import com.thermoheal.ai.domain.repository.UserRepository
@@ -24,6 +24,13 @@ import javax.inject.Singleton
 @Singleton
 class UserRepositoryImpl @Inject constructor(
     private val userDao: UserDao,
+    private val sensorReadingDao: SensorReadingDao,
+    private val pressureDao: PressureReadingDao,
+    private val temperatureDao: TemperatureReadingDao,
+    private val moistureDao: MoistureReadingDao,
+    private val gaitDao: GaitReadingDao,
+    private val aiInsightDao: AIInsightDao,
+    private val monitoringSessionDao: MonitoringSessionDao,
     private val prefs: PreferencesManager
 ) : UserRepository {
 
@@ -87,6 +94,21 @@ class UserRepositoryImpl @Inject constructor(
             occupation = profile.occupation, isDemoUser = profile.isDemoUser, createdAt = profile.createdAt
         )
         userDao.upsert(entity)
+    }
+
+    override suspend fun deleteAccount(): Result<Unit> {
+        val userId = prefs.currentUserId.first() ?: return Result.failure(IllegalStateException("No user logged in."))
+        sensorReadingDao.clearUserData(userId)
+        pressureDao.clearUserData(userId)
+        temperatureDao.clearUserData(userId)
+        moistureDao.clearUserData(userId)
+        gaitDao.clearUserData(userId)
+        aiInsightDao.clearUserData(userId)
+        monitoringSessionDao.clearUserSessions(userId)
+        userDao.clearAll()
+        prefs.setCurrentUserId(null)
+        prefs.setDemoModeEnabled(false)
+        return Result.success(Unit)
     }
 
     override suspend fun isLoggedIn(): Boolean = prefs.currentUserId.first() != null
