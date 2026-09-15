@@ -123,6 +123,7 @@ fun SignupScreen(
         }
     }
 }
+}
 
 @Composable
 private fun LabeledField(
