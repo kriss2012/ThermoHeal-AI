@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.thermoheal.ai.data.ai.AIEngine
 import com.thermoheal.ai.data.ai.RuleBasedAIEngine
 import com.thermoheal.ai.data.bluetooth.BleRepository
+import com.thermoheal.ai.data.bluetooth.CompositeBleRepository
 import com.thermoheal.ai.data.bluetooth.DemoDataSimulator
 import com.thermoheal.ai.data.local.ThermoHealDatabase
 import com.thermoheal.ai.data.local.dao.*
@@ -26,11 +27,13 @@ object DatabaseModule {
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): ThermoHealDatabase =
         Room.databaseBuilder(context, ThermoHealDatabase::class.java, ThermoHealDatabase.DATABASE_NAME)
-            .fallbackToDestructiveMigration() // acceptable for a research prototype; revisit before production
+            .addMigrations(ThermoHealDatabase.MIGRATION_1_2)
             .build()
 
     @Provides fun provideUserDao(db: ThermoHealDatabase): UserDao = db.userDao()
     @Provides fun provideDeviceDao(db: ThermoHealDatabase): DeviceDao = db.deviceDao()
+    @Provides fun provideMonitoringSessionDao(db: ThermoHealDatabase): MonitoringSessionDao = db.monitoringSessionDao()
+    @Provides fun provideSyncQueueDao(db: ThermoHealDatabase): SyncQueueDao = db.syncQueueDao()
     @Provides fun provideSensorReadingDao(db: ThermoHealDatabase): SensorReadingDao = db.sensorReadingDao()
     @Provides fun providePressureDao(db: ThermoHealDatabase): PressureReadingDao = db.pressureReadingDao()
     @Provides fun provideTemperatureDao(db: ThermoHealDatabase): TemperatureReadingDao = db.temperatureReadingDao()
@@ -44,12 +47,11 @@ object DatabaseModule {
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
 
-    // BLE: bound to the mock simulator by default so the app is fully usable
-    // without hardware (section 10). Swap the @Binds target to
-    // RealBleRepository once the insole's GATT profile is finalized.
+    // BLE: CompositeBleRepository cleanly delegates between RealBleRepository and
+    // DemoDataSimulator based on user's active device mode (Phase 98)
     @Binds
     @Singleton
-    abstract fun bindBleRepository(impl: DemoDataSimulator): BleRepository
+    abstract fun bindBleRepository(impl: CompositeBleRepository): BleRepository
 
     @Binds
     @Singleton
