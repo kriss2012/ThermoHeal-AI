@@ -17,6 +17,9 @@ import com.thermoheal.ai.data.bluetooth.SimulationSpeed
 import com.thermoheal.ai.ui.components.SectionHeader
 import com.thermoheal.ai.ui.components.ThermoCard
 import com.thermoheal.ai.ui.components.ThermoHealTopBar
+import com.thermoheal.ai.ui.responsive.LocalWindowSizeInfo
+import com.thermoheal.ai.ui.responsive.WindowWidthClass
+import com.thermoheal.ai.ui.responsive.readableContentWidth
 import com.thermoheal.ai.utils.PreferencesManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
@@ -50,9 +53,11 @@ fun SettingsScreen(onBack: () -> Unit, viewModel: SettingsViewModel = hiltViewMo
     val researchModeEnabled by viewModel.researchModeEnabled.collectAsState()
     val demoSpeed by viewModel.demoSpeed.collectAsState()
 
-    Scaffold(topBar = { ThermoHealTopBar("Settings", onBack) }) { padding ->
-        Column(Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(20.dp)) {
+    val windowSize = LocalWindowSizeInfo.current
+    val isTwoPane = windowSize.widthClass != WindowWidthClass.COMPACT || windowSize.isLandscape
 
+    val leftPane: @Composable () -> Unit = {
+        Column {
             SectionHeader("Appearance")
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -77,8 +82,11 @@ fun SettingsScreen(onBack: () -> Unit, viewModel: SettingsViewModel = hiltViewMo
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
                 SettingsSwitchRow("Enable Notifications", notificationsEnabled) { viewModel.setNotificationsEnabled(it) }
             }
+        }
+    }
 
-            Spacer(Modifier.height(16.dp))
+    val rightPane: @Composable () -> Unit = {
+        Column {
             SectionHeader("Research Mode")
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
                 SettingsSwitchRow("Enable Research Mode", researchModeEnabled) { viewModel.setResearchModeEnabled(it) }
@@ -102,12 +110,12 @@ fun SettingsScreen(onBack: () -> Unit, viewModel: SettingsViewModel = hiltViewMo
             }
 
             Spacer(Modifier.height(16.dp))
-            SectionHeader("AI")
+            SectionHeader("AI Intelligence Engine")
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
-                Text("Engine: Prototype AI / Rule-based demonstration", style = MaterialTheme.typography.bodyMedium)
+                Text("Engine: Deterministic Heuristic Engine (v1.0.0)", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    "Architected so a trained ML model can be swapped in without UI changes.",
+                    "Architected so an edge TFLite model can be swapped into the same AIEngine contract with zero UI impact.",
                     style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }
@@ -115,11 +123,46 @@ fun SettingsScreen(onBack: () -> Unit, viewModel: SettingsViewModel = hiltViewMo
             Spacer(Modifier.height(16.dp))
             SectionHeader("About")
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
-                Text("ThermoHeal-AI", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
-                Text("Version 1.0.0-prototype", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("ThermoHeal-AI™", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.SemiBold)
+                Text("Version 1.0.0 • Healthy Steps Ahead", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
+        }
+    }
 
-            Spacer(Modifier.height(90.dp))
+    Scaffold(topBar = { ThermoHealTopBar("Settings & Preferences", onBack) }) { padding ->
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .readableContentWidth(maxDp = 1100.dp),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(windowSize.contentPadding)
+            ) {
+                if (isTwoPane) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.spacedBy(20.dp)
+                    ) {
+                        Column(modifier = Modifier.weight(1f)) {
+                            leftPane()
+                        }
+                        Column(modifier = Modifier.weight(1f)) {
+                            rightPane()
+                        }
+                    }
+                } else {
+                    leftPane()
+                    Spacer(Modifier.height(16.dp))
+                    rightPane()
+                }
+
+                Spacer(Modifier.height(84.dp))
+            }
         }
     }
 }
