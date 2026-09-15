@@ -16,6 +16,8 @@ import com.thermoheal.ai.domain.model.ActivityLevel
 import com.thermoheal.ai.domain.model.DominantFoot
 import com.thermoheal.ai.ui.components.ThermoHealTopBar
 
+import com.thermoheal.ai.ui.responsive.readableContentWidth
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SignupScreen(
@@ -39,9 +41,20 @@ fun SignupScreen(
     LaunchedEffect(uiState.success) { if (uiState.success) onSignupSuccess() }
 
     Scaffold(topBar = { ThermoHealTopBar(title = "Create Account", onBack = onBack) }) { padding ->
-        Column(
-            Modifier.fillMaxSize().padding(padding).verticalScroll(rememberScrollState()).padding(horizontal = 24.dp, vertical = 12.dp)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .imePadding()
+                .readableContentWidth(maxDp = 680.dp),
+            contentAlignment = Alignment.TopCenter
         ) {
+            Column(
+                Modifier
+                    .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 24.dp, vertical = 12.dp)
+            ) {
             Text("Tell us about your feet", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             Spacer(Modifier.height(6.dp))
             Text(
