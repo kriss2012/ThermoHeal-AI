@@ -36,9 +36,33 @@ data class DeviceEntity(
     val packetsReceived: Long
 )
 
+@Entity(tableName = "monitoring_sessions")
+data class MonitoringSessionEntity(
+    @PrimaryKey val sessionId: String,
+    val userId: String,
+    val startTime: Long,
+    val endTime: Long?,
+    val source: String,
+    val createdAt: Long
+)
+
+@Entity(tableName = "sync_queue")
+data class SyncQueueEntity(
+    @PrimaryKey val id: String,
+    val entityType: String,
+    val entityId: String,
+    val payloadJson: String,
+    val status: String, // PENDING, UPLOADING, UPLOADED, FAILED
+    val retryCount: Int,
+    val createdAt: Long,
+    val updatedAt: Long
+)
+
 @Entity(tableName = "sensor_readings")
 data class SensorReadingEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val userId: String = "local_user",
+    val sessionId: String = "default_session",
     val timestamp: Long,
     val leftPressure: Double,
     val rightPressure: Double,
@@ -49,12 +73,16 @@ data class SensorReadingEntity(
     val batteryLevel: Int,
     val sessionType: String,
     val isValid: Boolean,
-    val qualityWarning: String?
+    val quality: String = "GOOD",
+    val qualityWarning: String?,
+    val createdAt: Long = System.currentTimeMillis()
 )
 
 @Entity(tableName = "pressure_readings")
 data class PressureReadingEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val userId: String = "local_user",
+    val sessionId: String = "default_session",
     val timestamp: Long,
     val side: String,
     val heel: Double,
@@ -63,38 +91,50 @@ data class PressureReadingEntity(
     val forefoot: Double,
     val bigToe: Double,
     val lesserToes: Double,
-    val sessionType: String
+    val sessionType: String,
+    val createdAt: Long = System.currentTimeMillis()
 )
 
 @Entity(tableName = "temperature_readings")
 data class TemperatureReadingEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val userId: String = "local_user",
+    val sessionId: String = "default_session",
     val timestamp: Long,
     val temperature: Double,
-    val sessionType: String
+    val sessionType: String,
+    val createdAt: Long = System.currentTimeMillis()
 )
 
 @Entity(tableName = "moisture_readings")
 data class MoistureReadingEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val userId: String = "local_user",
+    val sessionId: String = "default_session",
     val timestamp: Long,
     val moisture: Double,
-    val sessionType: String
+    val sessionType: String,
+    val createdAt: Long = System.currentTimeMillis()
 )
 
 @Entity(tableName = "gait_readings")
 data class GaitReadingEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val userId: String = "local_user",
+    val sessionId: String = "default_session",
     val timestamp: Long,
     val leftRightBalance: Double,
     val cadence: Double,
     val stridePattern: String,
-    val sessionType: String
+    val sessionType: String,
+    val createdAt: Long = System.currentTimeMillis()
 )
 
 @Entity(tableName = "ai_insights")
 data class AIInsightEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val userId: String = "local_user",
+    val sessionId: String = "default_session",
     val timestamp: Long,
     val category: String,
     val title: String,
@@ -104,7 +144,10 @@ data class AIInsightEntity(
     val recommendation: String,
     val contributingFactorsJson: String, // serialized List<ContributingFactor>
     val sessionType: String,
-    val disclaimer: String
+    val modelVersion: String = "rule-engine-1.0",
+    val algorithmVersion: String = "FWI-1.0-prototype",
+    val disclaimer: String,
+    val createdAt: Long = System.currentTimeMillis()
 )
 
 @Entity(tableName = "daily_summaries")
