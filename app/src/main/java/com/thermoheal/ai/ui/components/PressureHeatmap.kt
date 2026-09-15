@@ -10,18 +10,23 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
 import com.thermoheal.ai.domain.model.FootSide
 import com.thermoheal.ai.domain.model.FootZone
 import com.thermoheal.ai.ui.theme.SensorScale
 
 /**
- * A stylized single-foot pressure map. Values are 0-100 per zone.
- * Tapping a zone reports back via [onZoneTap] (section 14).
+ * Responsive anatomical foot pressure map.
+ * Guaranteed never to distort horizontally on tablets or landscape displays.
+ * Supports interactive zone tapping and TalkBack accessibility semantics.
  */
 @Composable
 fun FootPressureMap(
@@ -35,7 +40,7 @@ fun FootPressureMap(
     modifier: Modifier = Modifier,
     onZoneTap: (FootZone) -> Unit = {}
 ) {
-    // Normalized (0..1) vertical zone bands approximating a footprint silhouette, mirrored for the right foot.
+    // Normalized (0..1) vertical zone bands approximating a footprint silhouette
     val zones = listOf(
         Triple(FootZone.BIG_TOE, 0.03f to 0.16f, bigToe),
         Triple(FootZone.LESSER_TOES, 0.03f to 0.16f, lesserToes),
@@ -45,7 +50,19 @@ fun FootPressureMap(
         Triple(FootZone.HEEL, 0.74f to 0.98f, heel)
     )
 
-    Box(modifier = modifier) {
+    val highestZone = zones.maxByOrNull { it.third }?.first?.name ?: "Forefoot"
+    val maxPressureVal = zones.maxOfOrNull { it.third }?.toInt() ?: 0
+
+    val accessibilityText = "${side.name.lowercase().replaceFirstChar { it.uppercase() }} foot pressure map. " +
+            "Highest pressure is at $highestZone with $maxPressureVal percent load."
+
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .semantics { contentDescription = accessibilityText },
+        contentAlignment = Alignment.Center
+    ) {
         Canvas(
             modifier = Modifier
                 .fillMaxWidth()
@@ -53,9 +70,16 @@ fun FootPressureMap(
                 .pointerInput(side) {
                     detectTapGestures { offset ->
                         val h = size.height.toFloat()
+                        val w = size.width.toFloat()
+                        val footWidth = (h * 0.46f).coerceAtMost(w * 0.92f)
+                        val leftOrigin = (w - footWidth) / 2f
+                        val relX = (offset.x - leftOrigin) / footWidth
+
                         val yFrac = offset.y / h
+                        val isLeftHalf = if (side == FootSide.RIGHT) relX > 0.5f else relX < 0.5f
+
                         val zone = when {
-                            yFrac < 0.18f -> if (offset.x < size.width / 2f) FootZone.BIG_TOE else FootZone.LESSER_TOES
+                            yFrac < 0.18f -> if (isLeftHalf) FootZone.BIG_TOE else FootZone.LESSER_TOES
                             yFrac < 0.40f -> FootZone.FOREFOOT
                             yFrac < 0.55f -> FootZone.MIDFOOT
                             yFrac < 0.72f -> FootZone.ARCH
@@ -69,29 +93,49 @@ fun FootPressureMap(
             val h = size.height
             val mirror = side == FootSide.RIGHT
 
-            // Footprint silhouette (soft rounded blob approximation of heel->toes).
-            zones.forEach { (_, band, value) ->
+            // Anatomically bounded footprint box to avoid stretching on wide screens
+            val footWidth = (h * 0.46f).coerceAtMost(w * 0.92f)
+            val footLeft = (w - footWidth) / 2f
+
+            // Soft outline track for foot silhouette
+            drawRoundRect(
+                color = Color.White.copy(alpha = 0.04f),
+                topLeft = Offset(footLeft, h * 0.02f),
+                size = Size(footWidth, h * 0.96f),
+                cornerRadius = CornerRadius(footWidth / 2f, footWidth / 2f)
+            )
+
+            // Render each anatomical zone
+            zones.forEach { (zone, band, value) ->
                 val (yStart, yEnd) = band
                 val color = pressureColor(value)
                 val topY = h * yStart
                 val bottomY = h * yEnd
-                val widthFactor = when {
-                    yStart < 0.18f -> 0.55f  // toes narrower
-                    yStart < 0.40f -> 0.85f  // forefoot widest
-                    yStart < 0.55f -> 0.6f   // midfoot
-                    yStart < 0.72f -> 0.5f   // arch narrowest
-                    else -> 0.7f             // heel
+                val zoneHeight = bottomY - topY
+
+                val widthFactor = when (zone) {
+                    FootZone.BIG_TOE -> 0.42f
+                    FootZone.LESSER_TOES -> 0.48f
+                    FootZone.FOREFOOT -> 0.88f
+                    FootZone.MIDFOOT -> 0.65f
+                    FootZone.ARCH -> 0.52f
+                    FootZone.HEEL -> 0.68f
                 }
-                val left = w * (1f - widthFactor) / 2f
-                val right = w - left
-                val actualLeft = if (mirror) w - right else left
-                val actualRight = if (mirror) w - left else right
+
+                val currentZoneWidth = footWidth * widthFactor
+
+                val zoneLeft = when (zone) {
+                    FootZone.BIG_TOE -> if (mirror) footLeft + footWidth - currentZoneWidth else footLeft
+                    FootZone.LESSER_TOES -> if (mirror) footLeft else footLeft + footWidth - currentZoneWidth
+                    FootZone.ARCH -> if (mirror) footLeft + (footWidth - currentZoneWidth) * 0.8f else footLeft + (footWidth - currentZoneWidth) * 0.2f
+                    else -> footLeft + (footWidth - currentZoneWidth) / 2f
+                }
 
                 drawRoundRect(
                     color = color,
-                    topLeft = Offset(actualLeft, topY),
-                    size = androidx.compose.ui.geometry.Size(actualRight - actualLeft, bottomY - topY),
-                    cornerRadius = androidx.compose.ui.geometry.CornerRadius(24f, 24f)
+                    topLeft = Offset(zoneLeft, topY),
+                    size = Size(currentZoneWidth, zoneHeight),
+                    cornerRadius = CornerRadius(20f, 20f)
                 )
             }
         }
@@ -109,11 +153,17 @@ private fun pressureColor(value: Double): Color {
 
 @Composable
 fun PressureLegend(modifier: Modifier = Modifier) {
-    Row(modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        LegendDot(SensorScale.pressureLow, "Low")
-        LegendDot(SensorScale.pressureMedium, "Medium")
-        LegendDot(SensorScale.pressureMediumHigh, "Med-High")
-        LegendDot(SensorScale.pressureHigh, "High")
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = 4.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        LegendDot(SensorScale.pressureLow, "Low (<35%)")
+        LegendDot(SensorScale.pressureMedium, "Med (35-70%)")
+        LegendDot(SensorScale.pressureMediumHigh, "High (70-85%)")
+        LegendDot(SensorScale.pressureHigh, "Critical (>85%)")
     }
 }
 
