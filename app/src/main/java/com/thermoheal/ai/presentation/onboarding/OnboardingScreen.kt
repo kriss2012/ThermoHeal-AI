@@ -147,6 +147,8 @@ fun OnboardingScreen(onFinished: () -> Unit) {
                 modifier = Modifier.weight(if (pagerState.currentPage > 0) 1.5f else 1f).height(52.dp)
             ) {
                 Text(if (pagerState.currentPage == pages.size - 1) "Get Started" else "Continue")
+            }
         }
     }
+}
 }
