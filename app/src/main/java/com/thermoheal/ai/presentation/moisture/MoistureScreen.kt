@@ -11,6 +11,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.thermoheal.ai.domain.model.MoistureReading
 import com.thermoheal.ai.domain.repository.SensorRepository
@@ -33,7 +34,7 @@ class MoistureViewModel @Inject constructor(
 
 @Composable
 fun MoistureScreen(onBack: () -> Unit, viewModel: MoistureViewModel = hiltViewModel()) {
-    val readings by viewModel.readings.collectAsState()
+    val readings by viewModel.readings.collectAsStateWithLifecycle()
     val current = readings.lastOrNull()?.moisture ?: 0.0
     val avg = readings.map { it.moisture }.let { if (it.isEmpty()) 0.0 else it.average() }
     val accumulatedMinutes = readings.count { it.moisture > 30.0 }
