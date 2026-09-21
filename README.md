@@ -156,3 +156,13 @@ Continuous Integration is configured using GitHub Actions in [`.github/workflows
 
 ## License & Medical Disclaimer
 All software rights reserved. **Wellness insight only — not a medical diagnosis.**
+
+---
+
+## Contributing
+
+Contributions are welcome! Please review [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct and development process.
+
+## Author
+
+Developed and maintained by **[Krishna Patil](https://github.com/kriss2012)**.
