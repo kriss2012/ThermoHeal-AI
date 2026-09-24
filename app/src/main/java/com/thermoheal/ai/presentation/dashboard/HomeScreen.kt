@@ -45,6 +45,7 @@ fun HomeScreen(
     val windowSize = LocalWindowSizeInfo.current
     val isExpanded = windowSize.widthClass == WindowWidthClass.EXPANDED
     val isMedium = windowSize.widthClass == WindowWidthClass.MEDIUM || (windowSize.isLandscape && !isExpanded)
+    val isDataActive = (device?.connectionState == ConnectionState.CONNECTED) || isDemoRunning
 
     // Reusable UI components
     val headerSection: @Composable () -> Unit = {
@@ -233,84 +234,92 @@ fun HomeScreen(
             demoBannerSection()
             Spacer(Modifier.height(16.dp))
 
-            when {
-                // EXPANDED: 3-column tablet dashboard (Section 5 & 27)
-                isExpanded -> {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(20.dp)
-                    ) {
-                        // Column 1: Wellness index, metrics, quick links
-                        Column(modifier = Modifier.weight(1.05f)) {
-                            heroWellnessCard()
-                            Spacer(Modifier.height(16.dp))
-                            metricGridSection()
-                            Spacer(Modifier.height(16.dp))
-                            exploreSection()
-                        }
-                        // Column 2: Foot Pressure Map & Device Prompt
-                        Column(modifier = Modifier.weight(1.15f)) {
-                            footPressureSection()
-                            Spacer(Modifier.height(16.dp))
-                            devicePromptCard()
-                        }
-                        // Column 3: AI Insights, Daily Summary & Disclaimer
-                        Column(modifier = Modifier.weight(1.1f)) {
-                            aiInsightSection()
-                            Spacer(Modifier.height(16.dp))
-                            dailySummarySection()
-                            Spacer(Modifier.height(16.dp))
-                            WellnessDisclaimer()
-                        }
-                    }
-                }
-
-                // MEDIUM / LANDSCAPE: 2-column layout (Section 5 & 27)
-                isMedium -> {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp)
-                    ) {
-                        // Left Column
-                        Column(modifier = Modifier.weight(1f)) {
-                            heroWellnessCard()
-                            Spacer(Modifier.height(16.dp))
-                            metricGridSection()
-                            Spacer(Modifier.height(16.dp))
-                            aiInsightSection()
-                        }
-                        // Right Column
-                        Column(modifier = Modifier.weight(1f)) {
-                            devicePromptCard()
-                            if (device?.connectionState != ConnectionState.CONNECTED) Spacer(Modifier.height(16.dp))
-                            footPressureSection()
-                            Spacer(Modifier.height(16.dp))
-                            dailySummarySection()
-                            Spacer(Modifier.height(16.dp))
-                            exploreSection()
-                            Spacer(Modifier.height(16.dp))
-                            WellnessDisclaimer()
+            if (!isDataActive) {
+                devicePromptCard()
+                Spacer(Modifier.height(16.dp))
+                exploreSection()
+                Spacer(Modifier.height(16.dp))
+                WellnessDisclaimer()
+            } else {
+                when {
+                    // EXPANDED: 3-column tablet dashboard (Section 5 & 27)
+                    isExpanded -> {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(20.dp)
+                        ) {
+                            // Column 1: Wellness index, metrics, quick links
+                            Column(modifier = Modifier.weight(1.05f)) {
+                                heroWellnessCard()
+                                Spacer(Modifier.height(16.dp))
+                                metricGridSection()
+                                Spacer(Modifier.height(16.dp))
+                                exploreSection()
+                            }
+                            // Column 2: Foot Pressure Map & Device Prompt
+                            Column(modifier = Modifier.weight(1.15f)) {
+                                footPressureSection()
+                                Spacer(Modifier.height(16.dp))
+                                devicePromptCard()
+                            }
+                            // Column 3: AI Insights, Daily Summary & Disclaimer
+                            Column(modifier = Modifier.weight(1.1f)) {
+                                aiInsightSection()
+                                Spacer(Modifier.height(16.dp))
+                                dailySummarySection()
+                                Spacer(Modifier.height(16.dp))
+                                WellnessDisclaimer()
+                            }
                         }
                     }
-                }
 
-                // COMPACT: Single-column vertical scroll (Section 5 & 27)
-                else -> {
-                    heroWellnessCard()
-                    Spacer(Modifier.height(16.dp))
-                    devicePromptCard()
-                    if (device?.connectionState != ConnectionState.CONNECTED) Spacer(Modifier.height(16.dp))
-                    metricGridSection()
-                    Spacer(Modifier.height(20.dp))
-                    footPressureSection()
-                    Spacer(Modifier.height(20.dp))
-                    aiInsightSection()
-                    Spacer(Modifier.height(20.dp))
-                    dailySummarySection()
-                    Spacer(Modifier.height(20.dp))
-                    exploreSection()
-                    Spacer(Modifier.height(16.dp))
-                    WellnessDisclaimer()
+                    // MEDIUM / LANDSCAPE: 2-column layout (Section 5 & 27)
+                    isMedium -> {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.spacedBy(16.dp)
+                        ) {
+                            // Left Column
+                            Column(modifier = Modifier.weight(1f)) {
+                                heroWellnessCard()
+                                Spacer(Modifier.height(16.dp))
+                                metricGridSection()
+                                Spacer(Modifier.height(16.dp))
+                                aiInsightSection()
+                            }
+                            // Right Column
+                            Column(modifier = Modifier.weight(1f)) {
+                                devicePromptCard()
+                                Spacer(Modifier.height(16.dp))
+                                footPressureSection()
+                                Spacer(Modifier.height(16.dp))
+                                dailySummarySection()
+                                Spacer(Modifier.height(16.dp))
+                                exploreSection()
+                                Spacer(Modifier.height(16.dp))
+                                WellnessDisclaimer()
+                            }
+                        }
+                    }
+
+                    // COMPACT: Single-column vertical scroll (Section 5 & 27)
+                    else -> {
+                        heroWellnessCard()
+                        Spacer(Modifier.height(16.dp))
+                        devicePromptCard()
+                        Spacer(Modifier.height(16.dp))
+                        metricGridSection()
+                        Spacer(Modifier.height(20.dp))
+                        footPressureSection()
+                        Spacer(Modifier.height(20.dp))
+                        aiInsightSection()
+                        Spacer(Modifier.height(20.dp))
+                        dailySummarySection()
+                        Spacer(Modifier.height(20.dp))
+                        exploreSection()
+                        Spacer(Modifier.height(16.dp))
+                        WellnessDisclaimer()
+                    }
                 }
             }
 
