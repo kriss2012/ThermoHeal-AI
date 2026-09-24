@@ -1,19 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="108dp" android:height="108dp" android:viewportWidth="108" android:viewportHeight="108">
-    <!-- Stylized footprint -->
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+
+    <!-- Outer Glow / Background Ring -->
+    <path
+        android:fillColor="#104D44"
+        android:pathData="M54,12C30.8,12,12,30.8,12,54s18.8,42,42,42s42,-18.8,42,-42S77.2,12,54,12z M54,92C33,92,16,75,16,54s17,-38,38,-38s38,17,38,38S75,92,54,92z" />
+
+    <!-- Stylized Footprint (Central Element) -->
     <path
         android:fillColor="#63E6D8"
-        android:pathData="M54,32 C46,32 40,40 40,50 C40,58 43,63 43,70 C43,78 38,82 38,88 C38,94 44,98 54,98 C64,98 70,94 70,88 C70,82 65,78 65,70 C65,63 68,58 68,50 C68,40 62,32 54,32 Z" />
-    <!-- Circuit traces -->
+        android:pathData="M54,30c-8,0-14,6-14,14c0,5,3,9,3,15c0,6-4,9-4,14c0,6,5,10,14,10s14,-4,14,-10c0,-5-4,-8-4,-14c0,-6,3,-10,3,-15C68,36,62,30,54,30z" />
+
+    <!-- AI Text Label (Simplified for Vector) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M78,35h4v1h-4z M78,37h4v1h-4z M80,35v4h1v-4z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M84,35h2l1,4h-1l-0.2,-1h-0.6l-0.2,1h-1L84,35z M85,36l-0.2,1.5h0.4L85,36z" />
+
+    <!-- Circuit Trace Lines -->
     <path
         android:strokeColor="#39A96B"
-        android:strokeWidth="1.6"
-        android:pathData="M30,40 L40,40 M30,40 L30,60 M78,45 L68,45 M78,45 L78,65 M34,74 L44,74 M74,78 L64,78"
-        android:fillColor="#00000000"/>
-    <!-- Circuit nodes -->
-    <path android:fillColor="#39A96B" android:pathData="M30,40 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" />
-    <path android:fillColor="#39A96B" android:pathData="M30,60 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" />
-    <path android:fillColor="#39A96B" android:pathData="M78,45 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" />
-    <path android:fillColor="#39A96B" android:pathData="M78,65 m-2,0 a2,2 0 1,0 4,0 a2,2 0 1,0 -4,0" />
+        android:strokeWidth="1.5"
+        android:strokeLineCap="round"
+        android:pathData="M54,40v15 M54,55l-5,5 M54,55l5,5 M50,45h8" />
+
+    <!-- Pulse Line (EKG Style) -->
+    <path
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="1.2"
+        android:pathData="M25,70h5l2,-5l3,10l2,-5h5" />
+
 </vector>
