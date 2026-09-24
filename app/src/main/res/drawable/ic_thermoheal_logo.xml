@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Background Square with Rounded Corners -->
+    <path
+        android:fillColor="#041D1A"
+        android:pathData="M30,10h140c11.05,0 20,8.95 20,20v140c0,11.05 -8.95,20 -20,20h-140c-11.05,0 -20,-8.95 -20,-20v-140c0,-11.05 8.95,-20 20,-20z" />
+
+    <!-- Glowing Outer Ring -->
+    <path
+        android:fillColor="#104D44"
+        android:pathData="M100,20c-44.18,0 -80,35.82 -80,80s35.82,80 80,80 80,-35.82 80,-80S144.18,20 100,20z M100,175c-41.42,0 -75,-33.58 -75,-75s33.58,-75 75,-75 75,33.58 75,75S141.42,175 100,175z" />
+
+    <!-- Stylized Footprint -->
+    <path
+        android:fillColor="#63E6D8"
+        android:pathData="M100,50c-15,0 -25,12 -25,25s6,16 6,26c0,12 -8,18 -8,28c0,12 10,20 27,20s27,-8 27,-20c0,-10 -8,-16 -8,-28c0,-10 6,-18 6,-26C125,62 115,50 100,50z" />
+
+    <!-- Circuit Nodes & Traces inside foot -->
+    <path
+        android:strokeColor="#39A96B"
+        android:strokeWidth="2.5"
+        android:strokeLineCap="round"
+        android:pathData="M100,70v30 M100,100l-15,15 M100,100l15,15 M85,85h30" />
+
+    <path
+        android:fillColor="#39A96B"
+        android:pathData="M100,70m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0 M85,85m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0 M115,85m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0 M85,115m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0 M115,115m-3,0a3,3 0 1,0 6,0a3,3 0 1,0 -6,0" />
+
+    <!-- AI Badge -->
+    <path
+        android:fillColor="#63E6D8"
+        android:pathData="M150,60h25v20h-25z" />
+    <path
+        android:fillColor="#041D1A"
+        android:pathData="M155,65l2,10h2l2,-10h-2l-1,5l-1,-5z M165,65v10h2v-10z" />
+
+    <!-- Leaf Element -->
+    <path
+        android:fillColor="#39A96B"
+        android:pathData="M60,130c0,0 -15,-5 -20,-20c0,0 5,15 20,20z" />
+    <path
+        android:fillColor="#63E6D8"
+        android:pathData="M60,130c0,0 -5,-15 -20,-20c0,0 15,5 20,20z" />
+
+</vector>
