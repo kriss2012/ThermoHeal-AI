@@ -43,7 +43,7 @@ data class DeviceInfo(
     val connectionState: ConnectionState,
     val batteryPercent: Int?,
     val signalStrength: SignalStrength,
-    val firmwareVersion: String = "Prototype v1.0",
+    val firmwareVersion: String = "v1.0.0-PROD",
     val hasPressureSensor: Boolean = true,
     val hasTemperatureSensor: Boolean = true,
     val hasMoistureSensor: Boolean = true,

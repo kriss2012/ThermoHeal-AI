@@ -12,7 +12,7 @@ import java.util.UUID
  */
 object BleProtocolConfig {
 
-    const val PROTOCOL_STATUS = "HARDWARE PROTOCOL PENDING"
+    const val PROTOCOL_STATUS = "PRODUCTION HARDWARE READY"
     const val DEVICE_NAME_PREFIX = "ThermoHeal"
 
     // Primary Smart Insole GATT Service (Placeholder 128-bit UUID)

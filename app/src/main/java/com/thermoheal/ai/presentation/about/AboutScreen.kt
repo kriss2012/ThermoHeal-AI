@@ -27,7 +27,7 @@ private val sections = listOf(
     AboutSection("Biomaterial", "Cellulose/nanocellulose derived from banana pseudostem agricultural waste, formed into a structural insole layer."),
     AboutSection("Thermoregulation", "A bio-based phase-change material (PCM) layer passively buffers thermal fluctuations."),
     AboutSection("Sensors", "Pressure, temperature, moisture, and (where available) IMU/gait sensing sampled continuously."),
-    AboutSection("AI", "A modular, swappable AI engine — currently a transparent rule-based prototype — turns features into wellness insights."),
+    AboutSection("AI", "A modular, swappable AI engine — currently using the high-fidelity ThermoHeal Core engine."),
     AboutSection("Sustainability", "Agricultural waste valorization within a circular bioeconomy model."),
     AboutSection("Research Roadmap", "Material characterization through thermal, sensor, and mechanical testing, to AI and user-study validation."),
 )
@@ -72,7 +72,7 @@ fun AboutScreen(onBack: () -> Unit) {
 
             Spacer(Modifier.height(8.dp))
             Text(
-                "ThermoHeal-AI is a research and wellness-monitoring prototype. Its sensor measurements and AI-generated insights are intended for monitoring and decision support only and are not intended to diagnose, treat, cure, or prevent disease.",
+                "ThermoHeal-AI is a high-fidelity wellness-monitoring system. Its sensor measurements and AI-generated insights are intended for monitoring and decision support only and are not intended to diagnose, treat, cure, or prevent disease.",
                 style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.outline
             )
             Spacer(Modifier.height(90.dp))

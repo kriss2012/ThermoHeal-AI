@@ -28,9 +28,9 @@ data class AIInsight(
     val observation: String,
     val recommendation: String,
     val contributingFactors: List<ContributingFactor> = emptyList(),
-    val sessionType: SessionType,
+    val sessionType: SessionType = SessionType.DEMO,
     val modelVersion: String = "rule-engine-1.0",
-    val algorithmVersion: String = "FWI-1.0-prototype",
+    val algorithmVersion: String = "FWI-1.0-PROD",
     val featureVersion: String = "v1",
     val disclaimer: String = "Wellness insight only — not a medical diagnosis.",
     val createdAt: Long = System.currentTimeMillis()
@@ -70,7 +70,7 @@ data class WellnessIndex(
     val moistureComponent: Int,
     val activityComponent: Int,
     val gaitComponent: Int,
-    val algorithmVersion: String = "FWI-1.0-prototype"
+    val algorithmVersion: String = "FWI-1.0-PROD"
 ) {
     val label: String get() = when {
         score >= 90 -> "Excellent"

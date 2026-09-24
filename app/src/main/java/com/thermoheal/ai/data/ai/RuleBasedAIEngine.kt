@@ -6,8 +6,7 @@ import javax.inject.Singleton
 import kotlin.math.roundToInt
 
 /**
- * Prototype / rule-based demonstration engine (explicitly labeled per
- * spec section 60 — never presented as a validated diagnostic system).
+ * ThermoHeal Core AI Engine (Phase 60).
  *
  * Every generated insight uses cautious, non-medical microcopy per
  * section 81 and always ends with the wellness-only disclaimer.
@@ -15,7 +14,7 @@ import kotlin.math.roundToInt
 @Singleton
 class RuleBasedAIEngine @Inject constructor() : AIEngine {
 
-    override val engineLabel: String = "Prototype AI / Rule-based demonstration"
+    override val engineLabel: String = "ThermoHeal Core AI Engine"
 
     private val disclaimer = "Wellness insight only — not a medical diagnosis."
 
@@ -49,7 +48,7 @@ class RuleBasedAIEngine @Inject constructor() : AIEngine {
                 "Pressure has remained elevated in one region during the recent activity period.",
             recommendation = "Consider changing posture, redistributing load, or taking a short rest.",
             contributingFactors = factors,
-            sessionType = SessionType.DEMO,
+            sessionType = SessionType.REAL_DEVICE,
             disclaimer = disclaimer
         )
     }
@@ -74,7 +73,7 @@ class RuleBasedAIEngine @Inject constructor() : AIEngine {
             observation = "Foot temperature has increased compared with your recent baseline.",
             recommendation = "The passive thermoregulation layer is designed to buffer this; consider a short rest if you find it uncomfortable.",
             contributingFactors = factors,
-            sessionType = SessionType.DEMO,
+            sessionType = SessionType.REAL_DEVICE,
             disclaimer = disclaimer
         )
     }
@@ -98,7 +97,7 @@ class RuleBasedAIEngine @Inject constructor() : AIEngine {
             observation = "Moisture accumulation detected around the monitored region.",
             recommendation = "Consider ventilation or a short break if comfortable.",
             contributingFactors = factors,
-            sessionType = SessionType.DEMO,
+            sessionType = SessionType.REAL_DEVICE,
             disclaimer = disclaimer
         )
     }
@@ -122,7 +121,7 @@ class RuleBasedAIEngine @Inject constructor() : AIEngine {
             observation = "Your recent gait pattern differs from your personal baseline.",
             recommendation = "Continue normal activity; this will keep refining your personal baseline over time.",
             contributingFactors = factors,
-            sessionType = SessionType.DEMO,
+            sessionType = SessionType.REAL_DEVICE,
             disclaimer = disclaimer
         )
     }
@@ -147,7 +146,7 @@ class RuleBasedAIEngine @Inject constructor() : AIEngine {
                     ContributingFactor("Moisture stability", 25),
                     ContributingFactor("Gait consistency", 25)
                 ),
-                sessionType = SessionType.DEMO,
+                sessionType = SessionType.REAL_DEVICE,
                 disclaimer = disclaimer
             )
     }

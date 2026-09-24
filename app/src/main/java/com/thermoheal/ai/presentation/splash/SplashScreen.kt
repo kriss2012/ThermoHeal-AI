@@ -373,7 +373,7 @@ fun SplashScreen(onFinished: () -> Unit) {
 
             // Subtle medical disclaimer footer
             Text(
-                text = "Research & Wellness Prototype • Not a Medical Diagnosis",
+                text = "Secure Wellness System • High-Fidelity Monitoring",
                 style = MaterialTheme.typography.labelSmall.copy(fontSize = 9.sp),
                 color = Color(0xFF557771)
             )

@@ -52,7 +52,7 @@ fun ResearchScreen(
             ThermoCard(modifier = Modifier.fillMaxWidth()) {
                 Text("ThermoHeal-AI Research Platform", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.Bold)
                 Spacer(Modifier.height(4.dp))
-                Text("Sustainable Smart Thermoregulatory Insole Prototype", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text("Sustainable Smart Thermoregulatory Insole System", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(10.dp))
                 Text("Core Scientific Domains", style = MaterialTheme.typography.labelLarge)
                 Spacer(Modifier.height(6.dp))

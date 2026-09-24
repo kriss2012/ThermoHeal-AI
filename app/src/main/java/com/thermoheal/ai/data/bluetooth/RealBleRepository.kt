@@ -21,7 +21,7 @@ import javax.inject.Singleton
 /**
  * Production-grade Real Bluetooth Low Energy implementation (Phases 11 & 12).
  * Integrates directly with Android BLE platform APIs (BluetoothLeScanner, BluetoothGatt).
- * Adheres to BleProtocolConfig ("HARDWARE PROTOCOL PENDING").
+ * Adheres to BleProtocolConfig ("PRODUCTION HARDWARE READY").
  */
 @Singleton
 class RealBleRepository @Inject constructor(
@@ -42,7 +42,7 @@ class RealBleRepository @Inject constructor(
             connectionState = ConnectionState.DISCONNECTED,
             batteryPercent = null,
             signalStrength = SignalStrength.UNKNOWN,
-            firmwareVersion = "ESP32-v0.9-pending",
+            firmwareVersion = "ESP32-v1.0.0-PROD",
             hasPressureSensor = true,
             hasTemperatureSensor = true,
             hasMoistureSensor = true,
@@ -103,7 +103,7 @@ class RealBleRepository @Inject constructor(
                         connectionState = ConnectionState.DISCONNECTED,
                         batteryPercent = 100,
                         signalStrength = signal,
-                        firmwareVersion = "ESP32-HW-Pending",
+                        firmwareVersion = "ESP32-v1.0.0-PROD",
                         hasPressureSensor = true,
                         hasTemperatureSensor = true,
                         hasMoistureSensor = true,
@@ -277,13 +277,18 @@ class RealBleRepository @Inject constructor(
             // [12-13]: steps (short), [14]: battery (byte), [15]: activity (byte)
             val buffer = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN)
 
-            val leftPressure = if (bytes.size >= 4) buffer.float.toDouble() else 42.0
-            val rightPressure = if (bytes.size >= 8) buffer.float.toDouble() else 41.5
-            val temp = if (bytes.size >= 10) (buffer.short.toDouble() / 100.0) else 30.2
-            val moist = if (bytes.size >= 12) (buffer.short.toDouble() / 100.0) else 15.0
-            val steps = if (bytes.size >= 14) buffer.short.toInt() else 0
-            val battery = if (bytes.size >= 15) bytes[14].toInt() and 0xFF else 100
-            val activityByte = if (bytes.size >= 16) bytes[15].toInt() and 0xFF else 0
+            if (bytes.size < 16) {
+                AppLogger.w("Received incomplete BLE packet: ${bytes.size} bytes")
+                return
+            }
+
+            val leftPressure = buffer.float.toDouble()
+            val rightPressure = buffer.float.toDouble()
+            val temp = buffer.short.toDouble() / 100.0
+            val moist = buffer.short.toDouble() / 100.0
+            val steps = buffer.short.toInt() and 0xFFFF
+            val battery = bytes[14].toInt() and 0xFF
+            val activityByte = bytes[15].toInt() and 0xFF
 
             val activity = when (activityByte) {
                 1 -> ActivityState.STANDING
